@@ -2,7 +2,7 @@
 ba·con  (bā′kən)
 n.<br>
 1. The salted and smoked meat from the back and sides of a pig. <br> 
-~~2.~~ 1. Proof that god exists and he loves us.  
+~~2.~~1. Proof that God exists and he loves us.  
 
 tel·e·graph  (tĕl′ĭ-grăf′) (from Ancient Greek: τῆλε, têle, "at a distance")
 n.<br>
