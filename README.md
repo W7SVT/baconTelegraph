@@ -1,6 +1,6 @@
 # baconTelegraph
 ba·con  (bā′kən)
-n.
+n.<br>
 1.The salted and smoked meat from the back and sides of a pig.  
 ~~2.~~ 1. Proof that god exists and he loves us.  
 
