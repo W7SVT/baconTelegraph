@@ -1,6 +1,12 @@
-# porkTelegraph
+# baconTelegraph
+## bacon > Ham
+## Telegraph oldest use of Radio
 
-###Prerequisites
+### Assumptions
+Fresh install of RaspberryPi OS
+Love of Ham Radio
+
+### Prerequisites
 
 ```
 sudo apt update && sudo apt upgrade
