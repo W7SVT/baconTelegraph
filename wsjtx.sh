@@ -33,3 +33,10 @@ echo "# Installing WSXJ-X  #"
 echo "######################" 
 
 sudo apt-get install $wsjtx_dl
+
+echo "######################" 
+echo "# Fixing locale      #"
+echo "######################" 
+
+sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
+sudo locale-gen
