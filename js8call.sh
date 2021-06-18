@@ -18,18 +18,31 @@ echo "#######################"
 echo "# Downloading JS8CALL #"
 echo "#######################" 
 
-js8call_dl=$(curl -sL http://files.js8call.com/latest.html | \
+js8call_dl=$(curl -sL https://trac.chirp.danplanet.com/chirp_daily/LATEST/ | \
     tac | \
-    grep armhf | \
-    awk -F'"' '$0=$2'
+    grep -E '"chirp-daily-*[0-9]{8}.tar.gz"' | \
+    awk -F'"' '$0=$8'
 )
 
-cd $HOME/Downloads
-
-wget -t 5 $js8call_dl
-
 echo "#######################" 
-echo "# Installing JS8CALL  #"
+echo "# Preping JS8CALL     #"
 echo "#######################" 
 
-sudo apt-get install js8call_dl
+mkdir $HOME/chirp
+cd $HOME/chirp
+
+echo "#######################" 
+echo "# Installing  JS8CALL #"
+echo "#######################" 
+
+wget -t 5 https://trac.chirp.danplanet.com/chirp_daily/LATEST/$js8call_dl -O - | tar -xz
+js8call_dir=$(echo $js8call_dl | | sed -n '/\.tar\.gz$/s///p')
+cd $js8call_dir
+sudo python setup.py install
+
+echo "#######################" 
+echo "# Might be nessasary  #"
+echo "#######################" 
+
+pip install future
+

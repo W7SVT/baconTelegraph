@@ -1,6 +1,6 @@
 #!/bin/bash
 #########################################################
-# Created by W7SVT Nov 2020 #############################
+# Created by W7SVT Oct 2021 #############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -11,31 +11,18 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $DIR
-hamlib_DL=$(curl -sL https://api.github.com/repos/Hamlib/Hamlib/releases/latest | grep -o -m 1 "http.*tar.gz")
-hamlib_ver=$(echo $hamlib_DL | sed -nr '/.*\-(.{,10}).*/s//\1/p' | sed -n '/\.tar\.gz$/s///p')
 cd $HOME/Downloads
 
-echo "######################" 
-echo "# Downloading hamlib #"
-echo "######################" 
+wget --tries 2 --connect-timeout=60 https://trac.chirp.danplanet.com/chirp_daily/LATEST/
+CHIRPBUILD=$(cat index.html | grep .tar.gz | grep chirp-daily- | awk '{ print $6 }' | sed 's/.*"//' | sed 's/>//' | sed 's/[<].*$//')
+sudo apt-get -y install python-gtk2 python-serial python-libxml2
 
-wget $hamlib_DL  -O - | tar -xz
+mkdir $HOME/chirp
+cd $HOME/chirp
 
-rm hamlib-$hamlib_ver.tar.gz
-cd hamlib-$hamlib_ver
-
-echo "######################" 
-echo "# Installing  hamlib #"
-echo "######################" 
-
-./configure
-make 
-sudo make install
-sudo ldconfig
-
-
-
-
-
-
+wget --tries 2 --connect-timeout=60 https://trac.chirp.danplanet.com/chirp_daily/LATEST/$CHIRPBUILD
+tar -xzf $CHIRPBUILD
+CHIRPDIR=$(echo $CHIRPBUILD | sed 's/[.].*$//')
+cd $CHIRPDIR
+sudo python setup.py install
+pip install future
