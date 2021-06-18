@@ -32,5 +32,4 @@ echo "######################"
 echo "# Installing WSXJ-X  #"
 echo "######################" 
 
-sudo dpkg -i $wsjtx_dl
-
+sudo apt-get install $wsjtx_dl
