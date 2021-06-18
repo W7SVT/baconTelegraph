@@ -32,7 +32,7 @@ echo "######################"
 echo "# Installing WSXJ-X  #"
 echo "######################" 
 
-sudo apt-get install $wsjtx_dl
+sudo apt-get install $HOME/Downloads/$wsjtx_dl -y
 
 echo "######################" 
 echo "# Fixing locale      #"
