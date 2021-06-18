@@ -17,20 +17,21 @@ echo "######################"
 echo "# Downloading JTDX   #"
 echo "######################" 
 
-wsjtx_dl=$(curl -sL https://jtdx.tech/en/ | \
-    tac | \
-    grep armhf.deb | \
-    grep -v rc | \
-    awk -F'"' '$0=$2'
-)
+# jtdx_dl=$(curl -sL https://jtdx.tech/en/ | \
+#     tac | \
+#     grep armhf.deb | \
+#     grep -v rc | \
+#     awk -F'"' '$0=$2'
+# )
+jtdx_dl=https://www.jtdx.tech/downloads/Linux/jtdx-2.2.0-rc155_r_armhf.deb
 
 cd $HOME/Downloads
 
-wget -t 5 https://physics.princeton.edu/pulsar/k1jt/$wsjtx_dl
+wget -t 5 $jtdx_dl
 
 echo "######################" 
 echo "# Installing JTDX    #"
 echo "######################" 
 
-sudo apt-get install $wsjtx_dl
+sudo apt-get install $jtdx_dl
 
