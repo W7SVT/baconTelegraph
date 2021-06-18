@@ -14,24 +14,21 @@
 cd $HOME/Downloads
 
 echo "######################" 
-echo "# Downloading JTDX   #"
+echo "# Downloading JTDX #"
 echo "######################" 
-
-# jtdx_dl=$(curl -sL https://jtdx.tech/en/ | \
+# TODO: Scrape is broken
+# jtdx_dl=$(curl -sL https://www.jtdx.tech/downloads/ | \
 #     tac | \
 #     grep armhf.deb | \
 #     grep -v rc | \
 #     awk -F'"' '$0=$2'
 # )
-jtdx_dl=https://www.jtdx.tech/downloads/Linux/jtdx-2.2.0-rc155_r_armhf.deb
-
 cd $HOME/Downloads
 
-wget -t 5 $jtdx_dl
+wget -t 5 https://www.jtdx.tech/downloads/Linux/jtdx-2.2.0-rc155_r_armhf.deb
 
 echo "######################" 
-echo "# Installing JTDX    #"
+echo "# Installing JTDX  #"
 echo "######################" 
 
 sudo apt-get install jtdx-2.2.0-rc155_r_armhf.deb
-
