@@ -33,5 +33,5 @@ echo "######################"
 echo "# Installing JTDX    #"
 echo "######################" 
 
-sudo apt-get install $jtdx_dl
+sudo apt-get install jtdx-2.2.0-rc155_r_armhf.deb
 
