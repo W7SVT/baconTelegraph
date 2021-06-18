@@ -1,3 +1,4 @@
+
 #!/bin/bash
 #########################################################
 # Created by W7SVT Oct 2021 #############################
@@ -13,16 +14,35 @@
 
 cd $HOME/Downloads
 
-wget --tries 2 --connect-timeout=60 https://trac.chirp.danplanet.com/chirp_daily/LATEST/
-CHIRPBUILD=$(cat index.html | grep .tar.gz | grep chirp-daily- | awk '{ print $6 }' | sed 's/.*"//' | sed 's/>//' | sed 's/[<].*$//')
-sudo apt-get -y install python-gtk2 python-serial python-libxml2
+echo "#######################" 
+echo "# Downloading CHIRP #"
+echo "#######################" 
+
+CHIRP_dl=$(curl -sL https://trac.chirp.danplanet.com/chirp_daily/LATEST/ | \
+    tac | \
+    grep -E '"chirp-daily-*[0-9]{8}.tar.gz"' | \
+    awk -F'"' '$0=$8'
+)
+
+echo "#######################" 
+echo "# Preping CHIRP     #"
+echo "#######################" 
 
 mkdir $HOME/chirp
 cd $HOME/chirp
 
-wget --tries 2 --connect-timeout=60 https://trac.chirp.danplanet.com/chirp_daily/LATEST/$CHIRPBUILD
-tar -xzf $CHIRPBUILD
-CHIRPDIR=$(echo $CHIRPBUILD | sed 's/[.].*$//')
-cd $CHIRPDIR
+echo "#######################" 
+echo "# Installing  CHIRP #"
+echo "#######################" 
+
+wget -t 5 https://trac.chirp.danplanet.com/chirp_daily/LATEST/$CHIRP_dl -O - | tar -xz
+CHIRP_dir=$(echo $CHIRP_dl | | sed -n '/\.tar\.gz$/s///p')
+cd $CHIRP_dir
 sudo python setup.py install
+
+echo "#######################" 
+echo "# Might be nessasary  #"
+echo "#######################" 
+
 pip install future
+
