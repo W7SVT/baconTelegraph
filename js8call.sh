@@ -24,12 +24,18 @@ js8call_dl=$(curl -sL http://files.js8call.com/latest.html | \
     awk -F'"' '$0=$2'
 )
 
+#([^\/]+$)
+
 cd $HOME/Downloads
 
-wget -t 5 $js8call_dl
+if [ ! -f $HOME/Downloads/js8call_2.2.0_armhf.deb ]; then
+    wget -t 5 $js8call_dl
+
+fi
 
 echo "#######################" 
 echo "# Installing JS8CALL  #"
 echo "#######################" 
 
-sudo apt-get install js8call_dl
+sudo apt-get install $HOME/Downloads/js8call_*armhf.deb -y
+
