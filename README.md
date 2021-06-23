@@ -18,10 +18,14 @@ Love of Ham Radio
 ### Prerequisites
 
 ```
-sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade -y
 sudo apt install -y \
   curl \
   cmake \
   pavucontrol \
-  git
+  git \
+  python3 \
+  python3-pip
+sudo pip3 install pi-ina219
+
 ```
