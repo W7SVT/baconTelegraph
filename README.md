@@ -29,3 +29,7 @@ sudo apt install -y \
 sudo pip3 install pi-ina219
 
 ```
+
+### CLI Enable I2C port:
+
+sudo raspi-config nonint do_i2c 0
