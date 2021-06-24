@@ -18,11 +18,10 @@ echo "#######################"
 echo "# Downloading conky   #"
 echo "#######################" 
 
-sudo add-apt-repository ppa:teejee2008/ppa
 sudo apt-get update
-sudo apt-get install conky-all conky-manager -y
+sudo apt-get install conky-all -y
 
-cd ~/.config
+cd $HOME/.config
 
 
 sudo cp /etc/conky/conky.conf .conkyrc
@@ -30,9 +29,12 @@ sudo cp /etc/conky/conky.conf .conkyrc
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER .conkyrc
 
 ## Runat Startup
-touch ~/conkystartup.sh
-sudo chmod a+x ~/conkystartup.sh
-echo 'sleep 10' >> ~/conkystartup.sh
-echo 'conky -b -c ~/.config/.conky_baconTelegraph &' >> ~/conkystartup.sh
+if [ ! -f $HOME/conkystartup.sh ]; then
+    touch $HOME/conkystartup.sh
+    echo 'sleep 10' >> $HOME/conkystartup.sh
+    echo 'conky -b -c $HOME/.config/.conky_baconTelegraph &' >> $HOME/conkystartup.sh
 
-cp ~/home/pi/files/baconTelegraph/.conky_baconTelegraph ~/.config/
+fi
+
+sudo chmod a+x $HOME/conkystartup.sh
+cp $HOME/baconTelegraph/files/.conky_baconTelegraph $HOME/.config/
