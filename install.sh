@@ -70,4 +70,5 @@ echo "Sorry, no selection made"
 exit 0   
    ;;
 esac
-/bin/sh test.sh
+####Once More
+/bin/sh install.sh
