@@ -72,5 +72,15 @@ fi
 
 ln -sf $HOME/.local/share/applications/conky.desktop $HOME/.config/autostart/conky.desktop
 
+echo "#######################" 
+echo "# Install Fonts       #"
+echo "#######################" 
+
+if [ ! -d $HOME/.fonts ]; then
+    mkdir -p $HOME/.fonts
+fi
+cp $HOME/baconTelegraph/fonts/*.ttf  $HOME/.fonts/
+fc-cache -v -f
+
 
 
