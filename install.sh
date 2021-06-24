@@ -13,7 +13,7 @@
 #########################################################
 
 ask=$(zenity --title "baconTelegraph Install" \
-	--text "Estimate Speed" \
+	--text "Proof that Pi is irrational" \
 	--list \
 	--radiolist \
 	--width=400 \
