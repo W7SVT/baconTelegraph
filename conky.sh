@@ -16,7 +16,7 @@ cd $HOME/Downloads
 
 Echo "What is your Callsign?"
 read CALLSIGN
-sed -i 's/NOCALL/$CALLSIGN/g' $HOME/baconTelegraph/files/.conky_baconTelegraph
+sed -i "s/NOCALL/$CALLSIGN/g" $HOME/baconTelegraph/files/.conky_baconTelegraph
 
 echo "#######################" 
 echo "# Downloading conky   #"
