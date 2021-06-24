@@ -15,21 +15,13 @@ n.<br>
 Fresh install of RaspberryPi OS
 Love of Ham Radio
 
-### Prerequisites
-
+### Install
 ```
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y \
-  curl \
-  cmake \
-  pavucontrol \
-  git \
-  python3 \
-  python3-pip
-sudo pip3 install pi-ina219
-
+cd ~
+git clone https://github.com/W7SVT/baconTelegraph.git
+cd ~/baconTelegraph
+/bin/bash install.sh
 ```
-
 ### CLI Enable I2C port:
 
 sudo raspi-config nonint do_i2c 0
