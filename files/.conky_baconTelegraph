@@ -70,10 +70,10 @@ ${alignr}Upload${texeci 600 vnstat |grep today -m1|cut -c32-45}
 
 ## NETWORK INFO ################
 ${font Michroma:bold:size=12}${color1}NETWORK INFO ${color0}${hr 2}
-${font Play:size=10}${color1}${voffset -8}WiFi Access Point:    ${color1}${wireless_essid wlo1}
-${voffset 2}Up${alignr 10}${color0}${totalup wlo1} / ${color1}${upspeed wlo1}
-${color1}Down${alignr 10}${color0}${totaldown wlo1} / ${color1}${downspeed wlo1}
-${voffset 4}Local IP Address ${color0}${alignr 10}${addr wlo1}
+${font Play:size=10}${color1}${voffset -8}WiFi Access Point:    ${color1}${wireless_essid wlan0}
+${voffset 2}Up${alignr 10}${color0}${totalup wlan0} / ${color1}${upspeed wlan0}
+${color1}Down${alignr 10}${color0}${totaldown wlan0} / ${color1}${downspeed wlan0}
+${voffset 4}Local IP Address ${color0}${alignr 10}${addr wlan0}
 ${color1}${voffset 0}Public IP Address ${color0}${alignr 10}${execi 3600 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
 ${voffset -24}
 
