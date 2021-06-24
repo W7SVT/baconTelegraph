@@ -14,6 +14,10 @@
 
 cd $HOME/Downloads
 
+Echo "What is your Callsign?"
+read CALLSIGN
+sed -i 's/NOCALL/$CALLSIGN/g' $HOME/baconTelegraph/files/.conky_baconTelegraph
+
 echo "#######################" 
 echo "# Downloading conky   #"
 echo "#######################" 
@@ -28,7 +32,7 @@ sudo cp /etc/conky/conky.conf .conkyrc
 
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER .conkyrc
 
-## Runat Startup
+## Create Startup file for testing
 if [ ! -f $HOME/conkystartup.sh ]; then
     touch $HOME/conkystartup.sh
     echo 'sleep 10' >> $HOME/conkystartup.sh
@@ -48,7 +52,7 @@ cat <<EOF > $HOME/.local/share/applications/conky.desktop
 Name=Conky
 Comment=Conky
 GenericName=Conky Screen Background Monitor
-Exec=conky
+Exec=sh -c "sleep 10; conky -b -c $HOME/.config/.conky_baconTelegraph;"
 Icon=$HOME/baconTelegraph/files/conky.png
 Type=Application
 Encoding=UTF-8
@@ -60,6 +64,11 @@ EOF
 echo "#######################" 
 echo "# Autostart conky     #"
 echo "#######################" 
+
+
+if [ ! -d $HOME/.config/autostart ]; then
+    mkdir -p $HOME/.config/autostart
+fi
 
 ln -sf $HOME/.local/share/applications/conky.desktop $HOME/.config/autostart/conky.desktop
 
