@@ -10,7 +10,7 @@ conky.config = {
 	own_window_transparent = true,
 	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 	double_buffer = true,
-	minimum_width = 250, minimum_height = 5,
+	minimum_width = 320, minimum_height = 5,
 	maximum_width = 400,
 	draw_shades = false,
 	draw_outline = false,
@@ -28,69 +28,90 @@ conky.config = {
 	net_avg_samples = 1,
 	override_utf8_locale = true,
 	use_spacer = 'right',
+-- TEXT color
+	default_color = '#333333',
+	color0 = '#165cc4',
+    	color1 = '#323232',
+    	color2 = '#323232',
+    	color3 = '#323232',
+    	color4 = '#0cb357',
+    	color5 = '#ffffff',
+
 };
 
 conky.text = [[
 
 ${voffset 15}
-${font Arial:size=30}${color Gray}${alignc} NOCALL
-${font Arial:bold:size=18}${color White}Gridsquare ${alignr}${color Gray}${execi 25 ~/baconTelegraph/files/grid | cut -c1-8}
+${font Michroma:bold:size=33}${color2}${alignc} NOCALL
+${font Play:bold:size=18}${color3}Gridsquare ${alignr}${color2}${execi 25 ~/baconTelegraph/files/grid | cut -c1-8}
 
-${color Gray}LOCAL${alignr}LOCAL
-${voffset -40}
-${color DarkSlateGray}${hr 2}
+${color0}${hr 2}
 
-${voffset -60}
-${font Arial:bold:size=22}${color White}${time %H:%M:%S}\
-${alignr}${tztime UTC %H:%M:%S}
-${font Arial:bold:size=22}${color White}${time %d%b%y}\
-${alignr}${tztime UTC %d%b%y}
 
+## TIME ########################
+${font Michroma:size=10}${voffset -50}${color0}${time %a} ${color0}${time %d%b%y}
+${font Michroma:size=18}${color1}${voffset -4}${time %H:%M:%S}${font Michroma:bold:size=24} ${alignr}LOCAL
+
+## TIME UTC ########################
+${font Michroma:size=10}${voffset -50}${color0}${tztime UTC %a} ${color0}${tztime UTC %d%b%y}
+${font Michroma:size=18}${color1}${voffset -4}${tztime UTC %H:%M:%S}${font Michroma:bold:size=24} ${alignr}ZULU
+
+## TIME UPS ########################
 ${voffset -75}
-${font Arial:bold:size=14}${color Gray}UPS Output ${color DarkSlateGray}${hr 2}
-${font Arial:bold:size=10}${color White}
+${font Michroma:bold:size=12}${color2}UPS Output ${color0}${hr 2}
+${font Play:bold:size=10}${color3}
 ${voffset -35}
 ${texeci 10 python3 ~/baconTelegraph/files/bat.py}
 
-${font Arial:bold:size=14}${color Gray}BANDWIDTH for ${time %d%b%y}${color DarkSlateGray}${hr 2}
-${font Arial:bold:size=10}${color White}Download${texeci 600 vnstat |grep today -m1|cut -c17-30} \
+## Bandwidth ########################
+${font Michroma:bold:size=12}${color2}BANDWIDTH Used Today ${color0}${hr 2}
+${font Play:bold:size=10}${color3}Download${texeci 600 vnstat |grep today -m1|cut -c17-30} \
 ${alignr}Upload${texeci 600 vnstat |grep today -m1|cut -c32-45}
 
-${font Arial:bold:size=14}${color Gray}NETWORK Info ${color DarkSlateGray}${hr 2}
-${font Arial:bold:size=10}${color White}Wireless IP address $alignr ${addr wlan0}
-${font Arial:bold:size=10}${color White}Wired IP address $alignr ${addr eth0}
+## NETWORK INFO ################
+${font Michroma:bold:size=12}${color1}NETWORK INFO ${hr 2}
+${font Play:size=10}${color1}${voffset -8}WiFi Access Point:    ${color1}${wireless_essid wlo1}
+${voffset 2}Up${alignr 10}${color0}${totalup wlo1} / ${color1}${upspeed wlo1}
+${color1}Down${alignr 10}${color0}${totaldown wlo1} / ${color1}${downspeed wlo1}
+${voffset 4}Local IP Address ${color0}${alignr 10}${addr wlo1}
+${color1}${voffset 0}Public IP Address ${color0}${alignr 10}${execi 3600 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
+${voffset -24}
 
-${font Arial:bold:size=14}${color Gray}RADIO Tools ${color DarkSlateGray}${hr 2}
-${font Arial:size=12}${if_running piardopc}${color green}ARDOP ACTIVE${else}${color red}ARDOP OFF$endif \
-${alignr}${if_running rigctld}${color green}RIGCTL ACTIVE${else}${color red}RIGCTL OFF$endif
-${if_running flrig}${color green}FLRIG ACTIVE${else}${color red}FLRIG OFF$endif \
-${alignr}${if_running direwolf}${color green}DIREWOLF ACTIVE${else}${color red}DIREWOLF OFF$endif
+## Radio Tools ########################
+${font Michroma:bold:size=12}${color2}RADIO Tools ${color0}${hr 2}
+${font Play:size=12}${if_running piardopc}${color4}ARDOP ACTIVE${else}${color5}ARDOP OFF$endif \
+${alignr}${if_running rigctld}${color4}RIGCTL ACTIVE${else}${color5}RIGCTL OFF$endif
+${if_running flrig}${color4}FLRIG ACTIVE${else}${color5}FLRIG OFF$endif \
+${alignr}${if_running direwolf}${color4}DIREWOLF ACTIVE${else}${color5}DIREWOLF OFF$endif
 
-${font Arial:bold:size=14}${color Gray}DIGITAL Radio ${color DarkSlateGray}${hr 2}
-${font Arial:size=12}
-${if_running jtdx}${color green}JTDX ACTIVE${else}${color red}JTDX OFF$endif \
-${alignr}${if_running wsjtx}${color green}WSJT-X ACTIVE${else}${color red}WSJT-X OFF$endif
-${if_running js8call}${color green}JS8CALL ACTIVE${else}${color red}JS8CALL OFF$endif \
-${alignr}${if_running fldigi}${color green}FLDIGI ACTIVE${else}${color red}FLDIGI OFF$endif
-${if_running pavucontrol}${color green}PULSE ACTIVE${else}${color red}PULSE OFF$endif \
-${alignr}${if_running pat}${color green}PAT ACTIVE${else}${color red}PAT OFF$endif
+## Digital Radio ########################
+${font Michroma:bold:size=12}${color2}DIGITAL Radio ${color0}${hr 2}
+${font Play:size=12}
+${if_running jtdx}${color4}JTDX ACTIVE${else}${color5}JTDX OFF$endif \
+${alignr}${if_running wsjtx}${color4}WSJT-X ACTIVE${else}${color5}WSJT-X OFF$endif
+${if_running js8call}${color4}JS8CALL ACTIVE${else}${color5}JS8CALL OFF$endif \
+${alignr}${if_running fldigi}${color4}FLDIGI ACTIVE${else}${color5}FLDIGI OFF$endif
+${if_running pavucontrol}${color4}PULSE ACTIVE${else}${color5}PULSE OFF$endif \
+${alignr}${if_running pat}${color4}PAT ACTIVE${else}${color5}PAT OFF$endif
 
+## System Info ########################
 ${voffset -55}
 ${color grey}
 ${font}
-${font Arial:bold:size=14}${color Gray}SYSTEM Info ${color DarkSlateGray} ${hr 2}
-${font Arial:bold:size=14}${color White}Frequency $alignr${freq_g cpu0}Ghz
-${font Arial:bold:size=14}${color White}Uptime $alignr${uptime}
+${font Play:bold:size=14}${color2}SYSTEM Info ${color0} ${hr 2}
+${font Play:bold:size=14}${color3}Frequency $alignr${freq_g cpu0}Ghz
+${font Play:bold:size=14}${color3}Uptime $alignr${uptime}
 #TEMP
-${font Arial:bold:size=14}${color White}Temp: $alignr ${exec /opt/vc/bin/vcgencmd measure_temp | cut -c6-9} C
+${font Play:bold:size=14}${color1}Temp: $alignr ${exec /opt/vc/bin/vcgencmd measure_temp | cut -c6-9} C
 ${voffset -15}
-${font Arial:bold:size=8}${color White}CPU${alignr}${cpu}%
-${cpubar cpu}
-${font Arial:bold:size=8}${color White}MEM $alignc $mem / $memmax $alignr $memperc%
-$membar
-${font Arial:bold:size=8}${color White}SWAP $alignc $swap / $swapmax $alignr $swapperc%
-$swapbar
-${font Arial:bold:size=8}${color White}HDD $alignc ${fs_used /home} / ${fs_size /home} $alignr ${fs_free_perc /home}%
-${fs_bar /home}
+${font Play:bold:size=8}${color1}CPU${alignr}${cpu}%
+${color5}${cpubar cpu}
+${font Play:bold:size=8}${color1}MEM $alignc $mem / $memmax $alignr $memperc%
+${color5}$membar
+${font Play:bold:size=8}${color1}HDD $alignc ${fs_used /home} / ${fs_size /home} $alignr ${fs_free_perc /home}%
+${color5}${fs_bar /home}
+${font Play:bold:size=8}${color1}SWAP $alignc $swap / $swapmax $alignr $swapperc%
+${color5}$swapbar
+
 
 ]];
