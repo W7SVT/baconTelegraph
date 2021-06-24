@@ -38,3 +38,30 @@ fi
 
 sudo chmod a+x $HOME/conkystartup.sh
 cp $HOME/baconTelegraph/files/.conky_baconTelegraph $HOME/.config/
+
+echo "#######################" 
+echo "# Desktop Entry conky #"
+echo "#######################" 
+
+cat <<EOF > $HOME/.local/share/applications/conky.desktop
+[Desktop Entry]
+Name=Conky
+Comment=Conky
+GenericName=Conky Screen Background Monitor
+Exec=conky
+Icon=$HOME/baconTelegraph/files/conky.png
+Type=Application
+Encoding=UTF-8
+Terminal=false
+Categories=HamRadio
+Keywords=Radio
+EOF
+
+echo "#######################" 
+echo "# Autostart conky     #"
+echo "#######################" 
+
+ln -sf $HOME/.local/share/applications/conky.desktop $HOME/.config/autostart/conky.desktop
+
+
+
