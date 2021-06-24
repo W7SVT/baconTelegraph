@@ -64,6 +64,9 @@ case $ask in
    "JS8call") \
 /bin/sh $HOME/baconTelegraph/js8call.sh
 ;;
-   *) echo "Sorry, no selection made";;
+   *) \
+echo "Sorry, no selection made"
+exit 0   
+   ;;
 esac
 /bin/sh test.sh
