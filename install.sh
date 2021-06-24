@@ -25,3 +25,15 @@ then
 else
     zenity --text-info --filename="$FILE" --html --title="HTML viewer"
 fi
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y \
+  curl \
+  cmake \
+  pavucontrol \
+  git \
+  python3 \
+  python3-pip
+sudo pip3 install pi-ina219
+
+pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg 
