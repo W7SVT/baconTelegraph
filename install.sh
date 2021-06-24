@@ -39,7 +39,8 @@ case $ask in
         pavucontrol \
         git \
         python3 \
-        python3-pip
+        python3-pip \
+	extra-xdg-menus 
     sudo pip3 install pi-ina219
     sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
     sudo locale-gen
