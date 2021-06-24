@@ -22,6 +22,8 @@ git clone https://github.com/W7SVT/baconTelegraph.git
 cd ~/baconTelegraph
 /bin/bash install.sh
 ```
+
+#### Note: Once you have installed everything you would like a reboot is nessasary
 ### CLI Enable I2C port:
 
 sudo raspi-config nonint do_i2c 0
