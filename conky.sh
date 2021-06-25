@@ -14,9 +14,36 @@
 
 cd $HOME/Downloads
 
-echo "What is your Callsign?"
-read CALLSIGN
-sed -i "s/NOCALL/$CALLSIGN/g" $HOME/baconTelegraph/files/.conky_baconTelegraph
+echo "######################" 
+echo "# Read/Set CALLSIGN  #"
+echo "######################" 
+
+if [ -n "$CALLSIGN" ]; then
+  echo "Your CALLSIGN is set to '$CALLSIGN'"
+  sed -i "s/NOCALL/$CALLSIGN/g" $HOME/baconTelegraph/files/.conky_baconTelegraph
+else
+  read  -r -p "What is your CALLSIGN?:" GRID
+  sudo echo "export CALLSIGN=$CALLSIGN" >> $HOME/.bashrc
+fi
+sleep 1
+
+~/baconTelegraph/files/grid
+
+echo "######################" 
+echo "# Read/Set GRID      #"
+echo "######################" 
+
+
+if [ -n "$GRID" ]; then
+  echo "Your GRID is set to '$GRID'"
+  touch $HOME/.config/grid
+  truncate -s 0 $HOME/.config/grid
+  echo $GRID >> $HOME/.config/grid
+else
+  read  -r -p "What is your GRID?:" GRID
+  sudo echo "export GRID=$GRID" >> $HOME/.bashrc
+fi
+sleep 1
 
 echo "#######################" 
 echo "# Downloading conky   #"
