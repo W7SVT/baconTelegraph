@@ -11,6 +11,27 @@
 #   \__/\  /   /____/ /_______  /   \___/     |____|    #
 #        \/                   \/                        #
 #########################################################
+## Set CALLSIGN
+
+if [ -n "$CALLSIGN" ]; then
+  echo "Your CALLSIGN is set to '$CALLSIGN'"
+  echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
+else
+  echo "What is your Callsign? Please type it and press Enter ot Return" \
+  read CALLSIGN
+  sudo echo "export CALLSIGN=$CALLSIGN" >> $HOME/.bashrc
+fi
+
+## SET GRID
+
+if [ -n "$GRID" ]; then
+  echo "Your GRID is set to '$GRID'"
+  echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
+else
+  echo "What is your Maidenhead Grid? Please type it and press Enter ot Return Example: DM41wk" \
+  read GRID
+  sudo echo "export GRID=$GRID" >> $HOME/.bashrc
+fi
 
 ask=$(zenity --title "baconTelegraph Install" \
 	--text "Proof that Pi is irrational" \
