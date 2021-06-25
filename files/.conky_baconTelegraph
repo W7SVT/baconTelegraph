@@ -43,7 +43,7 @@ conky.text = [[
 
 ${voffset -10}
 ${font Michroma:bold:size=33}${color2}${alignc} NOCALL
-${font Play:bold:size=18}${color3}Gridsquare ${alignr}${color2}${execi 25 ~/baconTelegraph/files/grid | cut -c1-8}
+${font Play:bold:size=18}${color3}Gridsquare ${alignr}${color2}${execi 25 $HOME/.config/grid}
 
 ${color0}${hr 2}
 
