@@ -36,3 +36,20 @@ echo "# Installing JTDX  #"
 echo "######################" 
 
 sudo apt-get install $HOME/Downloads/jtdx-2.2.0-rc155_r_armhf.deb -y
+
+echo "######################" 
+echo "# default config JTDX  #"
+echo "######################" 
+
+
+## get CALLSIGN
+
+if [ -n "$CALLSIGN" ]; then
+cp -f /baconTelegraph/files/JTDX.ini $HOME/.config
+sed -i "s/NOCALL/$CALLSIGN/g" $HOME/.config/JTDX.ini
+sed -i "s/NOGRID/$GRID" $HOME/.config/JTDX.ini
+else
+  echo "Please (re)run install.sh and set your GRID and CALLSIGN" \
+fi
+
+
