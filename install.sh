@@ -11,27 +11,36 @@
 #   \__/\  /   /____/ /_______  /   \___/     |____|    #
 #        \/                   \/                        #
 #########################################################
-## Set CALLSIGN
+echo "######################" 
+echo "# Read/Set CALLSIGN  #"
+echo "######################" 
 
 if [ -n "$CALLSIGN" ]; then
   echo "Your CALLSIGN is set to '$CALLSIGN'"
   echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
 else
-  echo "What is your Callsign? Please type it and press Enter ot Return" \
-  read CALLSIGN
+  read  -r -p "What is your CALLSIGN?:" GRID
   sudo echo "export CALLSIGN=$CALLSIGN" >> $HOME/.bashrc
 fi
 
-## SET GRID
+echo "######################" 
+echo "# Read/Set GRID      #"
+echo "######################" 
+sleep 1
 
 if [ -n "$GRID" ]; then
   echo "Your GRID is set to '$GRID'"
   echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
 else
-  echo "What is your Maidenhead Grid? Please type it and press Enter ot Return Example: DM41wk" \
-  read GRID
+  read  -r -p "What is your GRID?:" GRID
   sudo echo "export GRID=$GRID" >> $HOME/.bashrc
 fi
+
+sleep 1
+
+echo "######################" 
+echo "# Zenity Install Menu#"
+echo "######################" 
 
 ask=$(zenity --title "baconTelegraph Install" \
 	--text "Proof that Pi is irrational" \
