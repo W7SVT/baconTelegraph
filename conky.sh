@@ -27,7 +27,6 @@ else
 fi
 sleep 1
 
-~/baconTelegraph/files/grid
 
 echo "######################" 
 echo "# Read/Set GRID      #"
