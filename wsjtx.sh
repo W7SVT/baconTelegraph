@@ -40,3 +40,13 @@ echo "######################"
 
 sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
 sudo locale-gen
+
+## get CALLSIGN
+
+if [ -n "$CALLSIGN" ]; then
+cp -f /baconTelegraph/files/WSJT-X.ini $HOME/.config
+sed -i "s/NOCALL/$CALLSIGN/g" $HOME/.config/WSJT-X.ini
+sed -i "s/NOGRID/$GRID" $HOME/.config/WSJT-X.ini
+else
+  echo "Please (re)run install.sh and set your GRID and CALLSIGN" \
+fi
