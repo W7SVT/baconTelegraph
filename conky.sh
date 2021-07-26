@@ -58,14 +58,6 @@ sudo cp /etc/conky/conky.conf .conkyrc
 
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER .conkyrc
 
-## Create Startup file for testing
-if [ ! -f $HOME/conkystartup.sh ]; then
-    touch $HOME/conkystartup.sh
-    echo 'sleep 10' >> $HOME/conkystartup.sh
-    echo 'conky -b -c $HOME/.config/.conky_baconTelegraph &' >> $HOME/conkystartup.sh
-
-fi
-
 sudo chmod a+x $HOME/conkystartup.sh
 cp $HOME/baconTelegraph/files/.conky_baconTelegraph $HOME/.config/
 
