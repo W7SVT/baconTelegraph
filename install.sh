@@ -56,6 +56,7 @@ ask=$(zenity --title "baconTelegraph Install" \
     False "WSJT-X" \
     False "CHIRP" \
     False "Conky" \
+    False "Conky Small Screen" \
     False "JS8call" \
     )
 echo $ask
@@ -92,6 +93,9 @@ case $ask in
 ;;
    "Conky") \
 /bin/sh $HOME/baconTelegraph/conky.sh
+;;
+   "Conky") \
+/bin/sh $HOME/baconTelegraph/conkySM.sh
 ;;
    "JS8call") \
 /bin/sh $HOME/baconTelegraph/js8call.sh
