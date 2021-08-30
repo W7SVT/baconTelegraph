@@ -59,7 +59,7 @@ sudo cp /etc/conky/conky.conf .conkyrc
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER .conkyrc
 
 sudo chmod a+x $HOME/conkystartup.sh
-cp $HOME/baconTelegraph/files/.conky_baconTelegraph $HOME/.config/
+cp $HOME/baconTelegraph/files/.conky_baconTelegraph_SM_Screen $HOME/.config/
 
 echo "#######################" 
 echo "# Desktop Entry conky #"
@@ -70,7 +70,7 @@ cat <<EOF > $HOME/.local/share/applications/conky.desktop
 Name=Conky
 Comment=Conky
 GenericName=Conky Screen Background Monitor
-Exec=sh -c "sleep 10; conky -b -c $HOME/.config/.conky_baconTelegraph;"
+Exec=sh -c "sleep 10; conky -b -c $HOME/.config/.conky_baconTelegraph_SM_Screen;"
 Icon=$HOME/baconTelegraph/files/conky.png
 Type=Application
 Encoding=UTF-8
