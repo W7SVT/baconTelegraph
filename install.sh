@@ -1,7 +1,7 @@
 #!/bin/bash
 #########################################################
 # Created by W7SVT May 2021  ############################
-# Updated by W7SVT June 2021 ############################
+# Updated by W7SVT Nov 2021  ############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -13,12 +13,7 @@
 #########################################################
 
 echo "***************************************************"
-echo " Enable SSH                                        "
-echo "***************************************************"
-raspi-config nonint do_ssh
-
-echo "***************************************************"
-echo "# Read/Set CALLSIGN  #"
+echo "# Read/Set CALLSIGN                               #"
 echo "***************************************************"
 
 if [ -n "$CALLSIGN" ]; then
@@ -30,7 +25,7 @@ else
 fi
 
 echo "***************************************************"
-echo "# Read/Set GRID      #"
+echo "# Read/Set GRID                                   #"
 echo "***************************************************"
 sleep 1
 
@@ -60,6 +55,7 @@ ask=$(zenity --title "baconTelegraph Install" \
     False "hamlib" \
     False "JTDX" \
     False "WSJT-X" \
+    False "WSJT-X From SRC" \
     False "CHIRP" \
     False "Conky" \
     False "Conky Small Screen" \
@@ -82,7 +78,7 @@ case $ask in
     sudo pip3 install pi-ina219
     sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
     sudo locale-gen
-    
+    sudo raspi-config nonint do_ssh
     pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg 
 ;;
    "hamlib") \
@@ -93,6 +89,9 @@ case $ask in
 ;;
    "WSJT-X") \
 /bin/sh $HOME/baconTelegraph/wsjtx.sh
+;;
+   "WSJT-X From SRC") \
+/bin/sh $HOME/baconTelegraph/wsjtx_src.sh
 ;;
    "CHIRP") \
 /bin/sh $HOME/baconTelegraph/chirp.sh

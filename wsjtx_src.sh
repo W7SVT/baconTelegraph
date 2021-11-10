@@ -40,6 +40,7 @@ sudo apt install -y \
 	build-essential \
 	gcc \
 	g++ \
+	stow \
 	gfortran \
 	cmake \
 	git \
@@ -52,15 +53,21 @@ sudo apt install -y \
   	qttools5-dev-tools \
   	libqt5serialport5-dev
 
+sudo mkdir /usr/local/stow/wsjtx
 
 echo "###################################################"
-echo "# Installing WSXJ-X                               #"
+echo "# Installing WSXJ-X in stow                       #"
+echo "# to remove run 'sudo stow --delete wsjtx'        #"
 echo "###################################################"
+
+cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/wsjtx "${wsjtx_dl%.*}"
 cd WSJTX_BLD_DIR
-cmake "$HOME/Downloads/${wsjtx_dl%.*}"
-$HOME/Downloads
+cmake "../${wsjtx_dl%.*}"
+cd $HOME/Downloads/
+
 cmake --build WSJTX_BLD_DIR
 sudo cmake --build WSJTX_BLD_DIR --target install
+cd /usr/local/stow/ && sudo stow wsjtx
 
 echo "###################################################"
 echo "# get CALLSIGN & Grid                             #"
