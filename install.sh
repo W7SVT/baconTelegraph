@@ -19,7 +19,7 @@ if [ -n "$CALLSIGN" ]; then
   echo "Your CALLSIGN is set to '$CALLSIGN'"
   echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
 else
-  read  -r -p "What is your CALLSIGN?:" GRID
+  read  -r -p "What is your CALLSIGN?:" CALLSIGN
   sudo echo "export CALLSIGN=$CALLSIGN" >> $HOME/.bashrc
 fi
 
