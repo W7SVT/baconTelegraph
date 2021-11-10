@@ -2,6 +2,7 @@
 #!/bin/bash
 #########################################################
 # Created by W7SVT Nov 2021 #############################
+# Created by W7SVT Nov 2021 #############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -26,7 +27,7 @@ wsjtx_dl=$(curl -s https://physics.princeton.edu/pulsar/k1jt/wsjtx.html | \
 
 cd $HOME/Downloads
 
-wget -t 5 https://physics.princeton.edu/pulsar/k1jt/$wsjtx_dl -O - | tar -xzf
+wget -t 5 https://physics.princeton.edu/pulsar/k1jt/$wsjtx_dl -O - | tar -xz
 mkdir WSJTX_BLD_DIR
 
 
@@ -43,37 +44,28 @@ sudo apt install -y \
 	cmake \
 	git \
 	asciidoc \
-  asciidoctor \
+  	asciidoctor \
 	texinfo \
-  libfftw3-dev \
-  qtmultimedia5-dev \
-  qttools5-dev \
-  qttools5-dev-tools \
-  libqt5serialport5-dev
- 
-
+  	libfftw3-dev \
+  	qtmultimedia5-dev \
+  	qttools5-dev \
+  	qttools5-dev-tools \
+  	libqt5serialport5-dev
 
 
 echo "###################################################"
 echo "# Installing WSXJ-X                               #"
 echo "###################################################"
 cd WSJTX_BLD_DIR
-cmake ../"${wsjtx_dl%.*}"
-
-cd "${wsjtx_dl%.*}"
-cmake build "${wsjtx_dl%.*}"
-
-cmake --build ~/WSJTX_BLD_DIR
-
+cmake "$HOME/Downloads/${wsjtx_dl%.*}"
+$HOME/Downloads
+cmake --build WSJTX_BLD_DIR
+sudo cmake --build WSJTX_BLD_DIR --target install
 
 echo "###################################################"
-echo "# Fixing locale      #"
+echo "# get CALLSIGN & Grid                             #"
 echo "###################################################"
 
-sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
-sudo locale-gen
-
-## get CALLSIGN
 
 if [ -n "$CALLSIGN" ]; then
 cp -f /baconTelegraph/files/WSJT-X.ini $HOME/.config
