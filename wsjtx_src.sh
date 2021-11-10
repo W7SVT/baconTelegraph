@@ -51,7 +51,9 @@ sudo apt install -y \
   	qtmultimedia5-dev \
   	qttools5-dev \
   	qttools5-dev-tools \
-  	libqt5serialport5-dev
+  	libqt5serialport5-dev \
+	libboost-dev \
+	libboost-all-dev
 
 sudo mkdir /usr/local/stow/wsjtx
 
