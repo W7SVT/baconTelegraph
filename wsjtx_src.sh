@@ -38,10 +38,12 @@ echo "###################################################"
 
 sudo apt install -y \
 	build-essential \
+	gfortran \
 	gcc \
 	g++ \
-	stow \
-	gfortran \
+	stow 
+
+sudo apt install -y \
 	cmake \
 	git \
 	asciidoc \
