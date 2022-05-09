@@ -66,7 +66,7 @@ cd $HOME/Downloads/jtdx
 
 cmake --build JTDX_BLD_DIR
 sudo cmake --build JTDX_BLD_DIR --target install -j4
-cd /usr/local/stow/ && sudo stow wsjtx
+cd /usr/local/stow/ && sudo stow jtdx
 
 echo "###################################################"
 echo "# get CALLSIGN & Grid                             #"
