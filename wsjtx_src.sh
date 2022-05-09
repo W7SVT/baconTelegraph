@@ -54,8 +54,13 @@ sudo apt install -y \
   	qttools5-dev \
   	qttools5-dev-tools \
   	libqt5serialport5-dev \
+	libqt5websockets5-dev \
+	libqt5multimedia5 \
+	libqt5multimedia5-plugins \
+	qtmultimedia5-dev \
 	libboost-dev \
 	libboost-all-dev
+
 
 sudo mkdir /usr/local/stow/wsjtx
 
@@ -65,12 +70,14 @@ echo "# to remove run 'sudo stow --delete wsjtx'        #"
 echo "###################################################"
 
 cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/wsjtx "${wsjtx_dl%.*}"
+cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON 
+
 cd WSJTX_BLD_DIR
 cmake "../${wsjtx_dl%.*}"
 cd ../
 
 cmake --build WSJTX_BLD_DIR
-sudo cmake --build WSJTX_BLD_DIR --target install
+sudo cmake --build WSJTX_BLD_DIR --target install -j4
 cd /usr/local/stow/ && sudo stow wsjtx
 
 echo "###################################################"

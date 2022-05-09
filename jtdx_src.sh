@@ -53,6 +53,9 @@ sudo apt install -y \
   	qttools5-dev-tools \
   	libqt5serialport5-dev \
 	libqt5websockets5-dev \
+	libqt5multimedia5 \
+	libqt5multimedia5-plugins \
+	qtmultimedia5-dev \
 	libboost-dev \
 	libboost-all-dev
 
