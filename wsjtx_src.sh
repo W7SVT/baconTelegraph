@@ -13,7 +13,7 @@
 #        \/                   \/                        #
 #########################################################
 cd $HOME/Downloads
-
+mkdir wsjtx
 echo "###################################################" 
 echo "# Downloading WSJT-X Source                       #"
 echo "###################################################" 
@@ -25,7 +25,7 @@ wsjtx_dl=$(curl -s https://physics.princeton.edu/pulsar/k1jt/wsjtx.html | \
     awk -F'"' '$0=$2'
 )
 
-cd $HOME/Downloads
+cd $HOME/Downloads/wsjtx
 
 wget -t 5 https://physics.princeton.edu/pulsar/k1jt/$wsjtx_dl -O - | tar -xz
 mkdir WSJTX_BLD_DIR
@@ -67,7 +67,7 @@ echo "###################################################"
 cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/wsjtx "${wsjtx_dl%.*}"
 cd WSJTX_BLD_DIR
 cmake "../${wsjtx_dl%.*}"
-cd $HOME/Downloads/
+cd ../
 
 cmake --build WSJTX_BLD_DIR
 sudo cmake --build WSJTX_BLD_DIR --target install
