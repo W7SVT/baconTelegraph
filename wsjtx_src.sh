@@ -13,8 +13,7 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
-mkdir wsjtx
+mkdir $HOME/Downloads/wsjtx
 
 echo "###################################################" 
 echo "# Downloading WSJT-X Source                       #"
@@ -27,10 +26,13 @@ wsjtx_dl=$(curl -s https://physics.princeton.edu/pulsar/k1jt/wsjtx.html | \
     awk -F'"' '$0=$2'
 )
 
+wsjtx_stow="/usr/local/stow/"
+wsjtx_BLD="wsjtx_BLD_DIR"
+
 cd $HOME/Downloads/wsjtx
 
 wget -t 5 https://physics.princeton.edu/pulsar/k1jt/$wsjtx_dl -O - | tar -xz
-mkdir WSJTX_BLD_DIR
+mkdir $wsjtx_BLD
 
 
 echo "###################################################"
@@ -54,23 +56,22 @@ sudo apt install -y \
 	libboost-all-dev
 
 
-sudo mkdir /usr/local/stow/wsjtx
+sudo mkdir "$wsjtx_stow"wsjtx
 
 echo "###################################################"
 echo "# Installing WSXJ-X in stow                       #"
 echo "# to remove run 'sudo stow --delete wsjtx'        #"
 echo "###################################################"
 
-cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/wsjtx "${wsjtx_dl%.*}"
 cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "${wsjtx_dl%.*}"
 
-cd WSJTX_BLD_DIR
+cd $wsjtx_BLD
 cmake "../${wsjtx_dl%.*}"
 cd ../
 
-cmake --build WSJTX_BLD_DIR
-sudo cmake --build WSJTX_BLD_DIR --target install -j4
-cd /usr/local/stow/ && sudo stow wsjtx
+cmake --build $wsjtx_BLD -j4
+sudo cmake --build $wsjtx_BLD --target install -j4
+cd $wsjtx_stow && sudo stow wsjtx
 
 echo "###################################################"
 echo "# get CALLSIGN & Grid                             #"

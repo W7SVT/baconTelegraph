@@ -25,7 +25,7 @@ cd $HOME/Downloads/jtdx
 jtdx_dl=159
 
 
-wget https://github.com/jtdx-project/jtdx/archive/refs/tags/${wsjtx_dl}.tar.gz -O - | tar -xz
+wget https://github.com/jtdx-project/jtdx/archive/refs/tags/${jtdx_dl}.tar.gz -O - | tar -xz
 
 
 mkdir JTDX_BLD_DIR
@@ -54,18 +54,19 @@ sudo apt install -y \
 sudo mkdir /usr/local/stow/jtdx
 
 echo "###################################################"
-echo "# Installing JTDX in stow                         #"
-echo "# to remove run 'sudo stow --delete jtdx'         #"
+echo "# Installing JTDX in stow to remove run:          #"
+echo "# 'cd /usr/local/stow/ && sudo stow -D jtdx'      #"
 echo "###################################################"
 
-cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/jtdx "${jtdx_dl}"
-cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "${jtdx_dl}"
+#cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/jtdx "jtdx-${jtdx_dl}"
+cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "jtdx-${jtdx_dl}"
 cd JTDX_BLD_DIR
-cmake "../${jtdx_dl}"
+cmake "../jtdx-${jtdx_dl}"
 cd $HOME/Downloads/jtdx
 
-cmake --build JTDX_BLD_DIR
-sudo cmake --build JTDX_BLD_DIR --target install -j4
+cmake --build JTDX_BLD_DIR -j4
+#sudo cmake --build JTDX_BLD_DIR --target install -j4
+cd $HOME/Downloads/jtdx/JTDX_BLD_DIR && sudo cmake --install . --prefix /usr/local/stow/jtdx
 cd /usr/local/stow/ && sudo stow jtdx
 
 echo "###################################################"

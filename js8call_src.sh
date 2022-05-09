@@ -13,8 +13,8 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
-mkdir js8call
+
+mkdir $HOME/Downloads/js8call
 
 echo "###################################################" 
 echo "# Downloading JS8Call Source                      #"
@@ -22,19 +22,20 @@ echo "###################################################"
 
 cd $HOME/Downloads/js8call
 
-js8call_dl=$(curl -s http://files.js8call.com/latest.html | \
+js8_dl=$(curl -s http://files.js8call.com/latest.html | \
     tac | \
     grep .tgz | \
     grep -v rc | \
     awk -F'"' '$0=$2'
 )
 
-js8call_ver="$(basename "$js8call_dl" .tgz)"
+js8_ver="$(basename "$js8_dl" .tgz)"
+js8_stow="/usr/local/stow/"
+js8_BLD="js8call_BLD_DIR"
 
+wget -t 5 $js8_dl -O - | tar -xz
 
-wget -t 5 $js8call_dl -O - | tar -xz
-
-mkdir js8call_BLD_DIR
+mkdir $js8_BLD
 
 
 echo "###################################################"
@@ -58,20 +59,19 @@ sudo apt install -y \
 	libboost-dev \
 	libboost-all-dev
 
-sudo mkdir /usr/local/stow/js8call
+sudo mkdir "$js8_stow"js8call
 
 echo "###################################################"
-echo "# Installing JS8Call in stow                         #"
-echo "# to remove run 'sudo stow --delete js8call'        #"
+echo "# Installing JS8call in stow to remove run:       #"
+echo "# 'cd /usr/local/stow/ && sudo stow -D js8call'   #"
 echo "###################################################"
 
-cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/js8call js8call
 cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON js8call
-cd js8call_BLD_DIR
-cmake "../js8call"
+cd $js8_BLD && cmake "../js8call"
 cd $HOME/Downloads/js8call
 
-cmake --build js8call_BLD_DIR
-sudo cmake --build js8call_BLD_DIR --target install -j4
+cmake --build js8call_BLD_DIR -j4
+cd $HOME/Downloads/js8call/$js8_BLD && sudo cmake --install . --prefix "$js8_stow"js8call
+
 cd /usr/local/stow/ && sudo stow js8call
 
