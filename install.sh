@@ -1,7 +1,7 @@
 #!/bin/bash
 #########################################################
 # Created by W7SVT May 2021  ############################
-# Updated by W7SVT Nov 2021  ############################
+# Updated by W7SVT APR 2022  ############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -54,12 +54,12 @@ ask=$(zenity --title "baconTelegraph Install" \
     False "Prerequisites only" \
     False "hamlib" \
     False "JTDX From SRC" \
-    False "WSJT-X" \
     False "WSJT-X From SRC" \
+    False "JS8call From SRC" \
     False "CHIRP" \
     False "Conky" \
     False "Conky Small Screen" \
-    False "JS8call" \
+
     )
 echo $ask
 
@@ -69,11 +69,15 @@ case $ask in
      sudo apt install -y \
         curl \
         cmake \
-        pavucontrol \
         git \
         python3 \
         python3-pip \
         libasound2-dev \
+        build-essential \
+        gfortran \
+        gcc \
+        g++ \
+        stow \
         extra-xdg-menus 
     sudo pip3 install pi-ina219
     sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
@@ -102,8 +106,8 @@ case $ask in
    "Conky") \
 /bin/sh $HOME/baconTelegraph/conkySM.sh
 ;;
-   "JS8call") \
-/bin/sh $HOME/baconTelegraph/js8call.sh
+   "JS8call From SRC") \
+/bin/sh $HOME/baconTelegraph/js8call_src.sh
 ;;
    *) \
 echo "Sorry, no selection made"
