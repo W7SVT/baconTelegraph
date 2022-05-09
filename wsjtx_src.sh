@@ -2,7 +2,7 @@
 #!/bin/bash
 #########################################################
 # Created by W7SVT Nov 2021 #############################
-# Created by W7SVT Nov 2021 #############################
+# Updated by W7SVT APR 2022 #############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -12,8 +12,10 @@
 #   \__/\  /   /____/ /_______  /   \___/     |____|    #
 #        \/                   \/                        #
 #########################################################
+
 cd $HOME/Downloads
 mkdir wsjtx
+
 echo "###################################################" 
 echo "# Downloading WSJT-X Source                       #"
 echo "###################################################" 
@@ -35,17 +37,7 @@ echo "###################################################"
 echo "# Prepping WSXJ-X build & prereqs                 #"
 echo "###################################################"
 
-
 sudo apt install -y \
-	build-essential \
-	gfortran \
-	gcc \
-	g++ \
-	stow 
-
-sudo apt install -y \
-	cmake \
-	git \
 	asciidoc \
   	asciidoctor \
 	texinfo \
@@ -70,7 +62,7 @@ echo "# to remove run 'sudo stow --delete wsjtx'        #"
 echo "###################################################"
 
 cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/wsjtx "${wsjtx_dl%.*}"
-cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON 
+cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "${wsjtx_dl%.*}"
 
 cd WSJTX_BLD_DIR
 cmake "../${wsjtx_dl%.*}"

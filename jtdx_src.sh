@@ -2,7 +2,7 @@
 #!/bin/bash
 #########################################################
 # Created by W7SVT APR 2022 #############################
-# Created by W7SVT APR 2022 #############################
+# Updated by W7SVT APR 2022 #############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -12,8 +12,10 @@
 #   \__/\  /   /____/ /_______  /   \___/     |____|    #
 #        \/                   \/                        #
 #########################################################
+
 cd $HOME/Downloads
 mkdir jtdx
+
 echo "###################################################" 
 echo "# Downloading JTDX Source                         #"
 echo "###################################################" 
@@ -33,17 +35,7 @@ echo "###################################################"
 echo "# Prepping JTDX build & prereqs                   #"
 echo "###################################################"
 
-
 sudo apt install -y \
-	build-essential \
-	gfortran \
-	gcc \
-	g++ \
-	stow 
-
-sudo apt install -y \
-	cmake \
-	git \
 	asciidoc \
   	asciidoctor \
 	texinfo \
@@ -63,16 +55,17 @@ sudo mkdir /usr/local/stow/jtdx
 
 echo "###################################################"
 echo "# Installing JTDX in stow                         #"
-echo "# to remove run 'sudo stow --delete jtdx'        #"
+echo "# to remove run 'sudo stow --delete jtdx'         #"
 echo "###################################################"
 
 cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/jtdx "${jtdx_dl}"
+cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "${jtdx_dl}"
 cd JTDX_BLD_DIR
 cmake "../${jtdx_dl}"
 cd $HOME/Downloads/jtdx
 
 cmake --build JTDX_BLD_DIR
-sudo cmake --build JTDX_BLD_DIR --target install
+sudo cmake --build JTDX_BLD_DIR --target install -j4
 cd /usr/local/stow/ && sudo stow wsjtx
 
 echo "###################################################"
