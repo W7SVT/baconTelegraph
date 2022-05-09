@@ -53,7 +53,7 @@ ask=$(zenity --title "baconTelegraph Install" \
 	--column "Install" --column "Tool" \
     False "Prerequisites only" \
     False "hamlib" \
-    False "JTDX" \
+    False "JTDX From SRC" \
     False "WSJT-X" \
     False "WSJT-X From SRC" \
     False "CHIRP" \
@@ -84,8 +84,8 @@ case $ask in
    "hamlib") \
 /bin/sh $HOME/baconTelegraph/hamlib.sh
 ;;
-   "JTDX") \
-/bin/sh $HOME/baconTelegraph/jtdx.sh
+   "JTDX From SRC") \
+/bin/sh $HOME/baconTelegraph/jtdx_src.sh
 ;;
    "WSJT-X") \
 /bin/sh $HOME/baconTelegraph/wsjtx.sh
