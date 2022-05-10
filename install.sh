@@ -1,6 +1,6 @@
 #!/bin/bash
 #########################################################
-# Created by W7SVT May 2021  ############################
+# Created by W7SVT APR 2022  ############################
 # Updated by W7SVT APR 2022  ############################
 #########################################################
 #########################################################
@@ -11,33 +11,35 @@
 #   \__/\  /   /____/ /_______  /   \___/     |____|    #
 #        \/                   \/                        #
 #########################################################
+source ~/.bashrc
 
 echo "***************************************************"
 echo "# Read/Set CALLSIGN                               #"
 echo "***************************************************"
+sleep 1
 
-if [ -n "$CALLSIGN" ]; then
-  echo "Your CALLSIGN is set to '$CALLSIGN'"
-  echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
-else
-  read  -r -p "What is your CALLSIGN?:" CALLSIGN
-  sudo echo "export CALLSIGN=$CALLSIGN" >> $HOME/.bashrc
-fi
+[[ x"${CALLSIGN}" == "x" ]] \
+&& CALLSIGN=$(whiptail --title "Set CALLSIGN" \
+--inputbox "Please enter your CALLSIGN" 10 30 NOCALL 3>&1 1>&2 2>&3) \
+&& export CALLSIGN \
+&& sudo echo "export CALLSIGN=$CALLSIGN" >> $HOME/.bashrc \
+&& source ~/.bashrc \
+|| echo "Your CALLSIGN is set to '$CALLSIGN'"
 
 echo "***************************************************"
 echo "# Read/Set GRID                                   #"
 echo "***************************************************"
 sleep 1
 
-if [ -n "$GRID" ]; then
-  echo "Your GRID is set to '$GRID'"
-  echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
-else
-  read  -r -p "What is your GRID?:" GRID
-  sudo echo "export GRID=$GRID" >> $HOME/.bashrc
-fi
+[[ x"${GRID}" == "x" ]] \
+&& GRID=$(whiptail --title "Set GRID" \
+--inputbox "Please enter your GRID" 10 30 DM41 3>&1 1>&2 2>&3) \
+&& export GRID \
+&& sudo echo "export GRID=$GRID" >> $HOME/.bashrc \
+&& source ~/.bashrc \
+|| echo "Your GRID is set to '$GRID'"
 
-sleep 1
+
 
 echo "***************************************************"
 echo "# Zenity Install Menu#"
