@@ -81,7 +81,7 @@ case $SELECTED in
     pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg 
 ;;
    "hamlib") \
-/bin/sh $HOME/baconTelegraph/hamlib.sh
+/bin/sh $HOME/baconTelegraph/hamlib_src.sh
 ;;
    "JTDX") \
 /bin/sh $HOME/baconTelegraph/jtdx_src.sh
