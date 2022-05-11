@@ -54,9 +54,12 @@ SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" 
    JTDX "Feature Rich Software for FT8 and Other JT Modes" OFF \
    WSJT-X "FST4(W), FT4, FT8, JT4, JT9, JT65, Q65, MSK144, & WSPR" OFF \
    JS8Call "Digital weak signal keyboard to keyboard messaging" OFF \
+   ARDOP "HF Radio Modem - Amateur Radio Digital Open Protocol OFF \
+   Direwolf "AX.25 packet modem/TNC and APRS encoder/decoder" OFF \
    CHIRP "Open Source Radio Programmer" OFF \
    Conky "On Screen Display" OFF \
-   ConkySM "On Screen Display - Small Screen Version" OFF 3>&1 1>&2 2>&3)
+   ConkySM "On Screen Display - Small Screen Version" OFF \
+   gpsTimeSync "Enable timesync with timeserver and GPS" OFF 3>&1 1>&2 2>&3)
 
 case $SELECTED in
    "Prerequisites") \
@@ -100,6 +103,15 @@ case $SELECTED in
 ;;
    "JS8Call") \
 /bin/sh $HOME/baconTelegraph/js8call_src.sh
+;;
+   "ARDOP") \
+/bin/sh $HOME/baconTelegraph/ardop.sh
+;;
+   "Direwolf") \
+/bin/sh $HOME/baconTelegraph/direwolf.sh
+;;
+   "gpsTimeSync") \
+/bin/sh $HOME/baconTelegraph/gpsTimeSync.sh
 ;;
    *) \
 echo "Sorry, no selection made"
