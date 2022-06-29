@@ -16,7 +16,7 @@
 #**************************************************
 # Small & elegant way to install everything       #
 # Read app.list and install if not installed      #
-# Note: its not bragging if you did it            #
+# Note: its not bragging if you did / can do it   #
 #**************************************************
 echo "Install the everything"
 
