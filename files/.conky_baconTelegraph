@@ -42,7 +42,7 @@ conky.config = {
 conky.text = [[
 
 ${voffset -10}
-${font Michroma:bold:size=33}${color2}${alignc} NOCALL
+${font Michroma:bold:size=33}${color2}${alignc} W7SVT
 ${font Play:bold:size=18}${color3}Gridsquare ${alignr}${color2}${execi 30 cat $HOME/.config/grid}
 
 ${color0}${hr 2}

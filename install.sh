@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #########################################################
-# Created by W7SVT May 2021  ############################
+# Created by W7SVT APR 2022  ############################
 # Updated by W7SVT APR 2022  ############################
 #########################################################
 #########################################################
@@ -12,59 +12,57 @@
 #        \/                   \/                        #
 #########################################################
 
+#**************************************************
+#  Read/Set CALLSIGN                              #
+#**************************************************
+
+[[ x"${CALLSIGN}" == "x" ]] \
+&& CALLSIGN=$(whiptail --title "Set CALLSIGN" \
+--inputbox "Please enter your CALLSIGN" 10 30 NOCALL 3>&1 1>&2 2>&3) \
+&& export CALLSIGN \
+&& sudo echo "export CALLSIGN=$CALLSIGN" >> $HOME/.bashrc \
+&& source ~/.bashrc \
+|| sleep 1 
+
+#**************************************************
+# Read/Set GRID                                   #
+#**************************************************
+
+[[ x"${GRID}" == "x" ]] \
+&& GRID=$(whiptail --title "Set GRID" \
+--inputbox "Please enter your GRID" 10 30 DM41 3>&1 1>&2 2>&3) \
+&& export GRID \
+&& sudo echo "export GRID=$GRID" >> $HOME/.bashrc \
+&& source ~/.bashrc \
+|| sleep 1
+
+# Display if GRID and CALLSIGN are set
+
+TERM=ansi  whiptail --title "Howdy , Welcome to baconTelegraph" --infobox "Your CALL is set to ${CALLSIGN} and are in maidenhead grid ${GRID}" 8 78 
+sleep 4
+
 echo "***************************************************"
-echo "# Read/Set CALLSIGN                               #"
+echo "# whiptail Install Menu#"
 echo "***************************************************"
 
-if [ -n "$CALLSIGN" ]; then
-  echo "Your CALLSIGN is set to '$CALLSIGN'"
-  echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
-else
-  read  -r -p "What is your CALLSIGN?:" CALLSIGN
-  sudo echo "export CALLSIGN=$CALLSIGN" >> $HOME/.bashrc
-fi
 
-echo "***************************************************"
-echo "# Read/Set GRID                                   #"
-echo "***************************************************"
-sleep 1
+SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" \
+   --title "SELECT PACKAGES TO INSTALL" --radiolist \
+   "${callsign} Welcome to baconTelegraph" 20 100 10 \
+   Prerequisites "Install only prerequisites and none of the apps" ON \
+   hamlib "Rig control for most radios" OFF \
+   JTDX "Feature Rich Software for FT8 and Other JT Modes" OFF \
+   WSJT-X "FST4(W), FT4, FT8, JT4, JT9, JT65, Q65, MSK144, & WSPR" OFF \
+   JS8Call "Digital weak signal keyboard to keyboard messaging" OFF \
+   ARDOP "HF Radio Modem - Amateur Radio Digital Open Protocol" OFF \
+   Direwolf "AX.25 packet modem/TNC and APRS encoder/decoder" OFF \
+   CHIRP "Open Source Radio Programmer" OFF \
+   Conky "On Screen Display" OFF \
+   ConkySM "On Screen Display - Small Screen Version" OFF \
+   gpsTimeSync "Enable timesync with timeserver and GPS" OFF 3>&1 1>&2 2>&3)
 
-if [ -n "$GRID" ]; then
-  echo "Your GRID is set to '$GRID'"
-  echo "If you whish to change it please run 'sudo mousepad ~/.bashrc' and change it on the last line"
-else
-  read  -r -p "What is your GRID?:" GRID
-  sudo echo "export GRID=$GRID" >> $HOME/.bashrc
-fi
-
-sleep 1
-
-echo "***************************************************"
-echo "# Zenity Install Menu#"
-echo "***************************************************"
-
-ask=$(zenity --title "baconTelegraph Install" \
-	--text "Proof that Pi is irrational" \
-	--list \
-	--radiolist \
-	--width=400 \
-	--height=400 \
-	--multiple \
-	--column "Install" --column "Tool" \
-    False "Prerequisites only" \
-    False "hamlib" \
-    False "JTDX From SRC" \
-    False "WSJT-X From SRC" \
-    False "JS8call From SRC" \
-    False "CHIRP" \
-    False "Conky" \
-    False "Conky Small Screen" \
-
-    )
-echo $ask
-
-case $ask in
-   "Prerequisites only") \
+case $SELECTED in
+   "Prerequisites") \
      sudo apt update && sudo apt upgrade -y
      sudo apt install -y \
         curl \
@@ -86,15 +84,12 @@ case $ask in
     pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg 
 ;;
    "hamlib") \
-/bin/sh $HOME/baconTelegraph/hamlib.sh
+/bin/sh $HOME/baconTelegraph/hamlib_src.sh
 ;;
-   "JTDX From SRC") \
+   "JTDX") \
 /bin/sh $HOME/baconTelegraph/jtdx_src.sh
 ;;
    "WSJT-X") \
-/bin/sh $HOME/baconTelegraph/wsjtx.sh
-;;
-   "WSJT-X From SRC") \
 /bin/sh $HOME/baconTelegraph/wsjtx_src.sh
 ;;
    "CHIRP") \
@@ -103,11 +98,20 @@ case $ask in
    "Conky") \
 /bin/sh $HOME/baconTelegraph/conky.sh
 ;;
-   "Conky") \
+   "ConkySM") \
 /bin/sh $HOME/baconTelegraph/conkySM.sh
 ;;
-   "JS8call From SRC") \
+   "JS8Call") \
 /bin/sh $HOME/baconTelegraph/js8call_src.sh
+;;
+   "ARDOP") \
+/bin/sh $HOME/baconTelegraph/ardop.sh
+;;
+   "Direwolf") \
+/bin/sh $HOME/baconTelegraph/direwolf.sh
+;;
+   "gpsTimeSync") \
+/bin/sh $HOME/baconTelegraph/gpsTimeSync.sh
 ;;
    *) \
 echo "Sorry, no selection made"
