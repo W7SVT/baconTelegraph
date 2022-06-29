@@ -60,7 +60,8 @@ SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" 
    CHIRP "Open Source Radio Programmer" OFF \
    Conky "On Screen Display" OFF \
    ConkySM "On Screen Display - Small Screen Version" OFF \
-   gpsTimeSync "Enable timesync with timeserver and GPS" OFF 3>&1 1>&2 2>&3)
+   gpsTimeSync "Enable timesync with timeserver and GPS" OFF \
+   VSCodium "Open Source version of VS Code" OFF 3>&1 1>&2 2>&3)
 
 case $SELECTED in
    "Prerequisites") \
@@ -116,6 +117,9 @@ case $SELECTED in
 ;;
    "gpsTimeSync") \
 /bin/sh $HOME/baconTelegraph/gpsTimeSync.sh
+;;
+   "VSCodium") \
+/bin/sh $HOME/baconTelegraph/vscodium.sh
 ;;
    *) \
 echo "Sorry, no selection made"
