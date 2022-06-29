@@ -37,7 +37,7 @@ while IFS=: read -r f1 f2 f3; do
 	sleep 1
 
 done<app.list
-echo $f0
+
 
 
 
