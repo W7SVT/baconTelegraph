@@ -12,10 +12,8 @@ n.<br>
    1. To make known (an intended action, for example) in advance or unintentionally:
 
 ### Assumptions
-Fresh install of RaspberryPi OS Buster
-Love of Ham Radio
-
-Not working on Buckey (new version of Raspberry Pi OS) Oct 2021
+Fresh install of RaspberryPi OS Bullseye, though Buster is still supported until breaking changes
+<br>Love of Ham Radio
 
 ### Install
 ```

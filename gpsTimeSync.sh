@@ -22,8 +22,10 @@ sudo apt-get install -y \
     gpsd \
     chrony \
     gpsd-clients \
-    python-gps \
-    python-gi-cairo 
+    python3-gps \
+    python3-gi-cairo 
+
+
 
 echo "##############################" 
 echo "# Setting chrony config #"
