@@ -20,7 +20,7 @@ Love of Ham Radio
 cd ~
 git clone https://github.com/W7SVT/baconTelegraph.git
 cd ~/baconTelegraph
-/bin/bash install.sh
+lxterminal --geometry=120x60 -e "./install.sh"
 ```
 
 #### Note: Once you have installed everything you would like a reboot is nessasary
