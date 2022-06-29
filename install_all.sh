@@ -14,13 +14,11 @@
 #########################################################
 
 #**************************************************
-# Elegant way to install everything               #
+# Small & elegant way to install everything       #
 # Read app.list and install if not installed      #
 # Note: its not bragging if you did it            #
 #**************************************************
-
-
-
+echo "Install the everything"
 
 typeset f0=""
 while IFS=: read -r f1 f2 f3; do
@@ -38,6 +36,4 @@ while IFS=: read -r f1 f2 f3; do
 
 done<app.list
 
-
-
-
+echo "FIN"
