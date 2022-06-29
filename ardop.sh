@@ -13,8 +13,19 @@
 #########################################################
 
 echo "#######################" 
+echo "# Are you 64 bit?     #"
+echo "#######################" 
+
+if [ `getconf LONG_BIT` = '64' ]; then
+sudo dpkg --add-architecture armhf
+sudo apt update
+sudo apt install -y libqt5widgets5:armhf libqt5serialport5:armhf libasound2:armhf libasound2-plugins:armhf
+fi
+
+echo "#######################" 
 echo "# Download ARDOP HF   #"
 echo "#######################" 
+
 mkdir -p $HOME/ardop
 cd $HOME/ardop
 wget -t2 https://www.cantab.net/users/john.wiseman/Downloads/Beta/piardopc
@@ -42,9 +53,14 @@ Type=Application
 Categories=HamRadio;
 EOF
 
-mkdir -p $HOME/.config/G8BPQ
-touch $HOME/.config/G8BPQ/ARDOP_GUI.conf
+echo "########################" 
+echo "# Create Conf for ARDOP#"
+echo "########################" 
 
-echo "[General]"  >> $HOME/.config/G8BPQ/ARDOP_GUI.conf
-echo "Host=local" >> $HOME/.config/G8BPQ/ARDOP_GUI.conf
-echo "Port=8515" >> $HOME/.config/G8BPQ/ARDOP_GUI.conf
+mkdir -p $HOME/.config/G8BPQ
+
+cat <<EOF > $HOME/.config/G8BPQ/ARDOP_GUI.conf
+[General]
+Host=local
+Port=8515
+EOF
