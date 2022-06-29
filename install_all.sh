@@ -26,7 +26,7 @@ while IFS=: read -r f1 f2 f3; do
 	f0="$f1"
     if ls $f3*$app* > /dev/null 2>&1
     then
-        echo "$app is already installed"
+        echo "Skipping $app it is already installed"
     else
         echo "'$app' is installing"
         bash $HOME/baconTelegraph/$path
