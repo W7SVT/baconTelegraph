@@ -112,7 +112,7 @@ case $SELECTED in
 /bin/sh $HOME/baconTelegraph/ardop.sh
 ;;
    "Direwolf") \
-/bin/sh $HOME/baconTelegraph/direwolf.sh
+/bin/sh $HOME/baconTelegraph/direwolf_src.sh
 ;;
    "gpsTimeSync") \
 /bin/sh $HOME/baconTelegraph/gpsTimeSync.sh
