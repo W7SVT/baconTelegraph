@@ -50,6 +50,7 @@ SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" 
    --title "SELECT PACKAGES TO INSTALL" --radiolist \
    "${callsign} Welcome to baconTelegraph" 20 100 10 \
    Prerequisites "Install only prerequisites and none of the apps" ON \
+   ALL "Install all application" OFF \
    hamlib "Rig control for most radios" OFF \
    JTDX "Feature Rich Software for FT8 and Other JT Modes" OFF \
    WSJT-X "FST4(W), FT4, FT8, JT4, JT9, JT65, Q65, MSK144, & WSPR" OFF \
@@ -83,6 +84,9 @@ case $SELECTED in
     sudo raspi-config nonint do_ssh
     pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg 
 ;;
+   "ALL") \
+/bin/sh $HOME/baconTelegraph/install_all.sh
+;;
    "hamlib") \
 /bin/sh $HOME/baconTelegraph/hamlib_src.sh
 ;;
@@ -108,7 +112,7 @@ case $SELECTED in
 /bin/sh $HOME/baconTelegraph/ardop.sh
 ;;
    "Direwolf") \
-/bin/sh $HOME/baconTelegraph/direwolf.sh
+/bin/sh $HOME/baconTelegraph/direwolf_src.sh
 ;;
    "gpsTimeSync") \
 /bin/sh $HOME/baconTelegraph/gpsTimeSync.sh
