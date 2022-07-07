@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #########################################################
 # Created by W7SVT APR 2022  ############################
-# Updated by W7SVT APR 2022  ############################
+# Updated by W7SVT JUL 2022  ############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -50,7 +50,7 @@ SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" 
    --title "SELECT PACKAGES TO INSTALL" --radiolist \
    "${callsign} Welcome to baconTelegraph" 20 100 10 \
    Prerequisites "Install only prerequisites and none of the apps" ON \
-   ALL "Install all application (Prerequisites required) " OFF \
+   ALL "Install all applications (Prerequisites required first) " OFF \
    hamlib "Rig control for most radios" OFF \
    JTDX "Feature Rich Software for FT8 and Other JT Modes" OFF \
    WSJT-X "FST4(W), FT4, FT8, JT4, JT9, JT65, Q65, MSK144, & WSPR" OFF \
