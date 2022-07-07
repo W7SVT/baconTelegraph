@@ -53,13 +53,17 @@ sudo apt-get install conky-all -y
 
 cd $HOME/.config
 
-
+# Copy start config to etc and fix permissions
 sudo cp /etc/conky/conky.conf .conkyrc
-
 sudo chown ${USER:=$(/usr/bin/id -run)}:$USER .conkyrc
 
+# Copy base config to home/.config and fix permissions
 sudo chmod a+x $HOME/conkystartup.sh
 cp $HOME/baconTelegraph/files/.conky_baconTelegraph $HOME/.config/
+
+# Update N0CALL tp $CALLSIGN
+sed -i "s|N0CALL|$CALLSIGN|g" $HOME/.config/.conky_baconTelegraph
+
 
 echo "#######################" 
 echo "# Desktop Entry conky #"
