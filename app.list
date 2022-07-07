@@ -1,0 +1,9 @@
+rigctl:hamlib_src:/usr/local/bin/
+jtdx:jtdx_src:/usr/local/bin/
+wsjtx:wsjtx_src:/usr/local/bin/
+js8call:js8call_src:/usr/local/bin/
+chirp:chirp:/usr/bin/
+conky:conky:/usr/bin/
+piardopc:ardop:/home/pi/ardop/
+direwolf:direwolf_src:/usr/local/bin/
+gpsd:gpsTimeSync:/usr/sbin/
