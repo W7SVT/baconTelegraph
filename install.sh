@@ -50,7 +50,7 @@ SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" 
    --title "SELECT PACKAGES TO INSTALL" --radiolist \
    "${callsign} Welcome to baconTelegraph" 20 100 10 \
    Prerequisites "Install only prerequisites and none of the apps" ON \
-   ALL "Install all application" OFF \
+   ALL "Install all application (Prerequisites required) " OFF \
    hamlib "Rig control for most radios" OFF \
    JTDX "Feature Rich Software for FT8 and Other JT Modes" OFF \
    WSJT-X "FST4(W), FT4, FT8, JT4, JT9, JT65, Q65, MSK144, & WSPR" OFF \
