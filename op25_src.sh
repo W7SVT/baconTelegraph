@@ -15,6 +15,28 @@
 echo "#########################" 
 echo "# Download install OP25 #"
 echo "#########################" 
+sudo apt-get build-dep gnuradio
+sudo apt update && sudo apt upgrade -y
+    sudo apt install -y \
+    gnuradio \
+    gnuradio-dev \
+    gr-osmosdr \
+    librtlsdr-dev \
+    libuhd-dev \
+    libhackrf-dev \
+    libitpp-dev \
+    libpcap-dev \
+    liborc-dev \
+    cmake \
+    git \
+    swig \
+    build-essential \
+    pkg-config \
+    doxygen \
+    python3-numpy \
+    python3-waitress \
+    python3-requests \
+    gnuplot-x11
 
 git clone https://github.com/boatbod/op25.git
 cd op25/
