@@ -1,0 +1,3 @@
+Sysname	Control Channel List	Offset	NAC	Modulation	TGID Tags File	Whitelist	Blacklist	Center Frequency
+Cochise County	769.28125	0	0x6f1	cqpsk	cochise.tsv			
+Ft Huachuca	408.7625	0	0x260	cqpsk	huachuca.tsv			
