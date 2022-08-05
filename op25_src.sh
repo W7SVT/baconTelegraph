@@ -56,7 +56,7 @@ cat <<EOF > $HOME/op25/op25.sh
 #! /bin/sh
 
 cd ~/op25/op25/gr-op25_repeater/apps
-./rx.py --args 'rtl' -N 'LNA:47' -S 2400000 -f 769.2812e6 -o 25000 -X -T trunk.>
+./rx.py --args 'rtl' -N 'LNA:47' -S 2400000 -f 769.2812e6 -o 25000 -X -T trunk.tsv -V -2 -U 2> stderr-stream0.2 -l 'http:0.0.0.0:8080'
 xdg-open http://0.0.0.0:8080/
 
 EOF
