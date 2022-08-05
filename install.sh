@@ -60,6 +60,7 @@ SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" 
    CHIRP "Open Source Radio Programmer" OFF \
    Conky "On Screen Display" OFF \
    ConkySM "On Screen Display - Small Screen Version" OFF \
+   OP25 "P25 Decoder - Listen to P25" OFF \
    gpsTimeSync "Enable timesync with timeserver and GPS" OFF 3>&1 1>&2 2>&3)
 
 case $SELECTED in
@@ -113,6 +114,9 @@ case $SELECTED in
 ;;
    "Direwolf") \
 /bin/sh $HOME/baconTelegraph/direwolf_src.sh
+;;
+   "OP25") \
+/bin/sh $HOME/baconTelegraph/op25_src.sh
 ;;
    "gpsTimeSync") \
 /bin/sh $HOME/baconTelegraph/gpsTimeSync.sh
