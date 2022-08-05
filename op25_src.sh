@@ -13,8 +13,15 @@
 #########################################################
 
 echo "#########################" 
+echo "# Enable deb-src        #"
+echo "#########################" 
+
+ sed -e "s/^# deb/deb/g" /etc/apt/sources.list
+
+echo "#########################" 
 echo "# Download install OP25 #"
 echo "#########################" 
+
 sudo apt-get build-dep gnuradio
 sudo apt update && sudo apt upgrade -y
     sudo apt install -y \
@@ -38,15 +45,19 @@ sudo apt update && sudo apt upgrade -y
     python3-requests \
     gnuplot-x11
 
-git clone https://github.com/boatbod/op25.git
-cd op25/
+echo "##########################" 
+echo "# Clone OP25 and install #"
+echo "##########################" 
+
+git clone https://github.com/boatbod/op25.git ~/op25
+cd ~/op25/
 bash install.sh 
 
 echo "##########################" 
 echo "# Copy OP25 Conf to apps #"
 echo "##########################" 
 
-cp baconTelegraph/files/OP25_conf/* ~/op25/op25/gr-op25_repeater/apps
+cp ~/baconTelegraph/files/OP25_conf/* ~/op25/op25/gr-op25_repeater/apps
 
 echo "########################" 
 echo "# Create OP25 Script   #"
