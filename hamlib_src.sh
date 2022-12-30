@@ -12,7 +12,7 @@
 #########################################################
 
 echo "#############################" 
-echo "# Install prereq libusb-1.0.24  #"
+echo "# Install prereq libusb-1.X #"
 echo "#############################"
 
 sudo apt-get install -y \
@@ -20,26 +20,39 @@ sudo apt-get install -y \
   cmake \
   libudev-dev
 
-cd $HOME
-hamlib_DL=$(curl -sL https://api.github.com/repos/Hamlib/Hamlib/releases/latest | grep -o -m 1 "http.*tar.gz")
-hamlib_ver=$(echo $hamlib_DL | sed -nr '/.*\-(.{,10}).*/s//\1/p' | sed -n '/\.tar\.gz$/s///p')
+echo "############################" 
+echo "# Set variables for latest #"
+echo "############################" 
+
+libusb_bzip_url=$(curl -sL https://api.github.com/repos/libusb/libusb/releases/latest |  grep -o -m 1 "http.*tar.bz2")
+libusb_ver=$(basename "$libusb_bzip_url" .tar.bz2)
+
+hamlib_tarball_url=$(curl -sL https://api.github.com/repos/Hamlib/Hamlib/releases/latest | grep -o -m 1 "http.*tar.gz")
+hamlib_ver=$(basename "$hamlib_tarball_url" .tar.gz)
 
 echo "#############################" 
 echo "# Downloading libusb-1.0.24 #"
 echo "#############################"
+cd $HOME
+wget $libusb_bzip_url -O - | tar -xj
+cd $libusb_ver
 
-wget https://github.com/libusb/libusb/releases/download/v1.0.24/libusb-1.0.24.tar.bz2  -O - | tar -xj
-cd libusb-1.0.24
+echo "######################" 
+echo "# Installing  libusb #"
+echo "######################" 
+
 ./configure --prefix=/usr --disable-static && make
 sudo make install
+sudo ldconfig
 
 echo "######################" 
 echo "# Downloading hamlib #"
 echo "######################" 
 
-wget $hamlib_DL  -O - | tar -xz
+cd $HOME
+wget $hamlib_tarball_url  -O - | tar -xz
 
-cd hamlib-$hamlib_ver
+cd $hamlib_ver
 
 echo "######################" 
 echo "# Installing  hamlib #"
