@@ -19,7 +19,7 @@ echo "###################################################"
 echo "# Downloading WSJT-X Source                       #"
 echo "###################################################" 
 
-wsjtx_dl=$(curl -s https://physics.princeton.edu/pulsar/k1jt/wsjtx.html | \
+wsjtx_dl=$(curl -s https://sourceforge.net/projects/wsjt/files/wsjtx-2.6.0/ | \
     tac | \
     grep .tgz | \
     grep -v rc | \
