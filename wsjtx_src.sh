@@ -2,7 +2,7 @@
 #!/bin/bash
 #########################################################
 # Created by W7SVT Nov 2021 #############################
-# Updated by W7SVT APR 2022 #############################
+# Updated by W7SVT JAN 2023 #############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -19,20 +19,19 @@ echo "###################################################"
 echo "# Downloading WSJT-X Source                       #"
 echo "###################################################" 
 
-wsjtx_dl=$(curl -s https://sourceforge.net/projects/wsjt/files/wsjtx-2.6.0/ | \
-    tac | \
-    grep .tgz | \
-    grep -v rc | \
-    awk -F'"' '$0=$2'
-)
+wsjtx_ver=$(curl -qsL "https://sourceforge.net/projects/wsjt/best_release.json" | \
+	sed "s/, /,\n/g" | \
+	sed -rn "/release/,/\}/{ /filename/{ 0,//s/([^0-9]*)([0-9\.]+)([^0-9]*.*)/\2/ p }}"
+	)
+
 
 wsjtx_stow="/usr/local/stow/"
 wsjtx_BLD="wsjtx_BLD_DIR"
 
 cd $HOME/Downloads/wsjtx
 
-wget -t 5 https://physics.princeton.edu/pulsar/k1jt/$wsjtx_dl -O - | tar -xz
-mkdir $wsjtx_BLD
+wget -t 5 https://sourceforge.net/projects/wsjt/files/wsjtx-$wsjtx_ver/wsjtx-$wsjtx_ver.tgz -O - | tar -xz
+
 
 
 echo "###################################################"
@@ -53,25 +52,32 @@ sudo apt install -y \
 	libqt5multimedia5-plugins \
 	qtmultimedia5-dev \
 	libboost-dev \
-	libboost-all-dev
+	libboost-all-dev 
 
 
-sudo mkdir "$wsjtx_stow"wsjtx
+sudo mkdir "$wsjtx_stow"wsjtx-"$wsjtx_ver"
+
+
+tar xzf wsjtx-$wsjtx_ver/src/wsjtx.tgz 
+
+mv wsjtx $wsjtx_BLD
+
 
 echo "###################################################"
-echo "# Installing WSXJ-X in stow                       #"
-echo "# to remove run 'sudo stow --delete wsjtx'        #"
+echo "# Installing WSXJ-X in stow                              #"
+echo "# to remove run                                          #"
+echo "# cd /usr/local/stow/&& sudo stow --delete wsjtx*        #"
 echo "###################################################"
-
-cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "${wsjtx_dl%.*}"
 
 cd $wsjtx_BLD
-cmake "../${wsjtx_dl%.*}"
-cd ../
+cmake \
+	-DWSJT_SKIP_MANPAGES=ON \
+	-DWSJT_GENERATE_DOCS=OFF \
+	-D CMAKE_INSTALL_PREFIX="$wsjtx_stow"wsjtx-"$wsjtx_ver" "${wsjtx_dl%.*}"
 
-cmake --build $wsjtx_BLD -j4
-sudo cmake --build $wsjtx_BLD --target install -j4
-cd $wsjtx_stow && sudo stow wsjtx
+cmake --build . --parallel$(nproc)
+sudo cmake --build . --target install
+cd $wsjtx_stow && sudo stow wsjtx-"$wsjtx_ver"
 
 echo "###################################################"
 echo "# get CALLSIGN & Grid                             #"
