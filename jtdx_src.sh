@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #########################################################
 # Created by W7SVT APR 2022 #############################
@@ -59,13 +58,12 @@ echo "# 'cd /usr/local/stow/ && sudo stow -D jtdx'      #"
 echo "###################################################"
 
 #cmake -D CMAKE_INSTALL_PREFIX=/usr/local/stow/jtdx "jtdx-${jtdx_dl}"
-cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "jtdx-${jtdx_dl}"
+cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "../jtdx-${jtdx_dl}"
 cd JTDX_BLD_DIR
-cmake "../jtdx-${jtdx_dl}"
 cd $HOME/Downloads/jtdx
 
-cmake --build JTDX_BLD_DIR -j4
-#sudo cmake --build JTDX_BLD_DIR --target install -j4
+cmake --build JTDX_BLD_DIR -j$(nproc)
+
 cd $HOME/Downloads/jtdx/JTDX_BLD_DIR && sudo cmake --install . --prefix /usr/local/stow/jtdx
 cd /usr/local/stow/ && sudo stow jtdx
 
