@@ -75,3 +75,18 @@ cd $HOME/Downloads/js8call/$js8_BLD && sudo cmake --install . --prefix "$js8_sto
 
 cd /usr/local/stow/ && sudo stow js8call
 
+echo "###################################################"
+echo "# get CALLSIGN & Grid                             #"
+echo "###################################################"
+
+if [ -n "$CALLSIGN" ]; then
+dd of=$HOME/.config/JS8Call.ini << EOF
+[Configuration]
+MyCall=$CALLSIGN
+MyGrid=$GRID
+EOF
+else
+	echo "Please (re)run install.sh and set your GRID and CALLSIGN"
+fi
+
+

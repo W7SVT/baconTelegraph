@@ -77,11 +77,12 @@ echo "###################################################"
 echo "# get CALLSIGN & Grid                             #"
 echo "###################################################"
 
-
 if [ -n "$CALLSIGN" ]; then
-cp -f /baconTelegraph/files/WSJT-X.ini $HOME/.config
-sed -i "s/NOCALL/$CALLSIGN/g" $HOME/.config/WSJT-X.ini
-sed -i "s/NOGRID/$GRID" $HOME/.config/WSJT-X.ini
+dd of=$HOME/.config/WSJT-X.ini << EOF
+[Configuration]
+MyCall=$CALLSIGN
+MyGrid=$GRID
+EOF
 else
-  echo "Please (re)run install.sh and set your GRID and CALLSIGN" \
+	echo "Please (re)run install.sh and set your GRID and CALLSIGN"
 fi
