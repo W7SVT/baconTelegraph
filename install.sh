@@ -59,6 +59,7 @@ SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" 
    QSSTV "SlowScan Televison or images over radio" OFF \
    ARDOP "HF Radio Modem - Amateur Radio Digital Open Protocol" OFF \
    Direwolf "AX.25 packet modem/TNC and APRS encoder/decoder" OFF \
+   XASTIR "X Amateur Station Tracking and Information Reporting (APRS)" OFF \
    CHIRP "Open Source Radio Programmer" OFF \
    Conky "On Screen Display" OFF \
    ConkySM "On Screen Display - Small Screen Version" OFF \
@@ -129,6 +130,9 @@ case $SELECTED in
 ;;
    "Direwolf") \
 /bin/sh $HOME/baconTelegraph/direwolf_src.sh
+;;
+   "XASTIR") \
+/bin/sh $HOME/baconTelegraph/xastir_src.sh
 ;;
    "OP25") \
 /bin/sh $HOME/baconTelegraph/op25_src.sh

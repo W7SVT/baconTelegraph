@@ -65,8 +65,6 @@ sudo make install
 
 sudo rm $xastir_stow/share/xastir/maps/CC_OpenStreetMap.png
 
-
-
 sudo mkdir $xastir_stow/share/applications
 
 echo "########################" 
