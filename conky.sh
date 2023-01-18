@@ -66,7 +66,7 @@ sed -i "s|N0CALL|$CALLSIGN|g" $HOME/.config/.conky_baconTelegraph
 
 
 echo "#######################" 
-echo "# Desktop Entry conky #"
+echo "# Desktop Entry       #"
 echo "#######################" 
 
 cat <<EOF > $HOME/.local/share/applications/conky.desktop

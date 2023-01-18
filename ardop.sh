@@ -19,7 +19,11 @@ echo "#######################"
 if [ `getconf LONG_BIT` = '64' ]; then
 sudo dpkg --add-architecture armhf
 sudo apt update
-sudo apt install -y libqt5widgets5:armhf libqt5serialport5:armhf libasound2:armhf libasound2-plugins:armhf
+sudo apt install -y \
+    libqt5widgets5:armhf \
+    libqt5serialport5:armhf \
+    libasound2:armhf \
+    libasound2-plugins:armhf
 fi
 
 echo "#######################" 

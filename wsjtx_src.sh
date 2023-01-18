@@ -24,15 +24,12 @@ wsjtx_ver=$(curl -qsL "https://sourceforge.net/projects/wsjt/best_release.json" 
 	sed -rn "/release/,/\}/{ /filename/{ 0,//s/([^0-9]*)([0-9\.]+)([^0-9]*.*)/\2/ p }}"
 	)
 
-
-wsjtx_stow="/usr/local/stow/"
+wsjtx_stow="/usr/local/stow/wsjtx_"$wsjtx_ver""
 wsjtx_BLD="wsjtx_BLD_DIR"
 
 cd $HOME/Downloads/wsjtx
 
 wget -t 5 https://sourceforge.net/projects/wsjt/files/wsjtx-$wsjtx_ver/wsjtx-$wsjtx_ver.tgz -O - | tar -xz
-
-
 
 echo "###################################################"
 echo "# Prepping WSXJ-X build & prereqs                 #"
@@ -54,14 +51,11 @@ sudo apt install -y \
 	libboost-dev \
 	libboost-all-dev 
 
-
-sudo mkdir "$wsjtx_stow"wsjtx-"$wsjtx_ver"
-
+sudo mkdir "$wsjtx_stow"
 
 tar xzf wsjtx-$wsjtx_ver/src/wsjtx.tgz 
 
 mv wsjtx $wsjtx_BLD
-
 
 echo "###################################################"
 echo "# Installing WSXJ-X in stow                              #"
@@ -73,11 +67,11 @@ cd $wsjtx_BLD
 cmake \
 	-DWSJT_SKIP_MANPAGES=ON \
 	-DWSJT_GENERATE_DOCS=OFF \
-	-D CMAKE_INSTALL_PREFIX="$wsjtx_stow"wsjtx-"$wsjtx_ver" "${wsjtx_dl%.*}"
+	-D CMAKE_INSTALL_PREFIX="$wsjtx_stow"
 
 cmake --build . --parallel$(nproc)
 sudo cmake --build . --target install
-cd $wsjtx_stow && sudo stow wsjtx-"$wsjtx_ver"
+cd $wsjtx_stow/.. && sudo stow wsjtx_"$wsjtx_ver"
 
 echo "###################################################"
 echo "# get CALLSIGN & Grid                             #"

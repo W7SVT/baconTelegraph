@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #########################################################
 # Created by W7SVT APR 2022  ############################
-# Updated by W7SVT JUL 2022  ############################
+# Updated by W7SVT JAN 2023  ############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -55,6 +55,8 @@ SELECTED=$(whiptail --separate-output --backtitle "Proof that Pi is irrational" 
    JTDX "Feature Rich Software for FT8 and Other JT Modes" OFF \
    WSJT-X "FST4(W), FT4, FT8, JT4, JT9, JT65, Q65, MSK144, & WSPR" OFF \
    JS8Call "Digital weak signal keyboard to keyboard messaging" OFF \
+   wfview "Open-source software for the control of modern Icom radios" OFF \
+   QSSTV "SlowScan Televison or images over radio" OFF \
    ARDOP "HF Radio Modem - Amateur Radio Digital Open Protocol" OFF \
    Direwolf "AX.25 packet modem/TNC and APRS encoder/decoder" OFF \
    CHIRP "Open Source Radio Programmer" OFF \
@@ -82,6 +84,12 @@ case $SELECTED in
     sudo pip3 install pi-ina219
     sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
     sudo locale-gen
+
+    find /lib/modules -type f -name "*.ko"|grep cp21
+
+    sudo modprobe cp210x
+
+
     sudo raspi-config nonint do_ssh
     pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg 
 ;;
@@ -108,6 +116,12 @@ case $SELECTED in
 ;;
    "JS8Call") \
 /bin/sh $HOME/baconTelegraph/js8call_src.sh
+;;
+   "wfview") \
+/bin/sh $HOME/baconTelegraph/wfview_src.sh
+;;
+   "QSSTV") \
+/bin/sh $HOME/baconTelegraph/qsstv_src.sh
 ;;
    "ARDOP") \
 /bin/sh $HOME/baconTelegraph/ardop.sh
