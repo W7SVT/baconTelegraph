@@ -24,3 +24,6 @@ git clone https://github.com/W7SVT/baconTelegraph.git  ~/baconTelegraph && /bin/
 ### CLI Enable I2C port:
 
 sudo raspi-config nonint do_i2c 0
+
+echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee "/etc/sudoers.d/dont-prompt-$USER-for-sudo-password"
+
