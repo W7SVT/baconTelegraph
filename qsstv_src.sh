@@ -56,13 +56,11 @@ qmake .. PREFIX=$qsstv_stow
 make -j$(nproc)
 sudo make install
 
-cd $qsstv_stow/.. && sudo stow "$qsstv_ver"
-
 echo "########################" 
 echo "# Desktop Entry & Icon #"
 echo "########################" 
-sudo mkdir $qsstv_stow/share/applications
 sudo mkdir $qsstv_stow/share
+sudo mkdir $qsstv_stow/share/applications
 
 sudo dd of=$qsstv_stow/share/applications/qsstv.desktop << EOF
 [Desktop Entry]
@@ -77,3 +75,10 @@ Categories=HamRadio;
 EOF
 
 cp $HOME/Downloads/QSSTV/src/icons/qsstv.png $HOME/.local/share/icons/
+
+echo "###################################################"
+echo "# Installing QSSTV in stow, to remove run         #"
+echo "# cd /usr/local/stow/&& sudo stow --delete QSSTV* #"
+echo "###################################################"
+
+cd $qsstv_stow/.. && sudo stow "$qsstv_ver"
