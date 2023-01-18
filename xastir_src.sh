@@ -15,64 +15,75 @@
 cd $HOME/Downloads
 
 echo "###################################################"
-echo "# Prepping QSSTV build & prereqs                  #"
+echo "# Prepping XASTIR build & prereqs                 #"
 echo "###################################################"
 
-qsstv_ver="qsstv_9.5"
+xastir_ver=$(curl -s https://api.github.com/repos/Xastir/Xastir/releases/latest | \
+grep "tarball_url" | \
+sed 's/..$//' | \
+cut -d - -f2,3 
+)
 
-qsstv_stow="/usr/local/stow/$qsstv_ver"
+xastir_stow="/usr/local/stow/xastir_$xastir_ver"
 
-sudo mkdir $qsstv_stow
+sudo mkdir $xastir_stow
 
 sudo apt-get install -y \
-    g++ \
-    libfftw3-dev \
-    qtbase5-dev \
-    qtchooser \
-    qt5-qmake \
-    qtbase5-dev-tools \
-    libpulse-dev \
-    libqt5svg5-dev \
-    libqt5opengl5-dev \
-    libhamlib-dev \
-    libasound2-dev \
-    libv4l-dev \
-    libopenjp2-7 \
-    libopenjp2-7-dev
+    automake \
+    xorg-dev \
+    libmotif-dev \
+    graphicsmagick \
+    gv \
+    libcurl4-openssl-dev \
+    shapelib \
+    libshp-dev \
+    libpcre3-dev \
+    libproj-dev \
+    libdb-dev \
+    libax25-dev \
+    libwebp-dev \
+    libwebp-dev \
+    libgraphicsmagick1-dev \
+    festival \
+    festival-dev
 
 
-git clone https://github.com/ON4QZ/QSSTV.git
+git clone https://github.com/Xastir/Xastir.git
 
 echo "###################################################"
-echo "# Installing QSSTV in stow                        #"
+echo "# Installing XASTIR in stow                        #"
 echo "# to remove run                                   #"
-echo "# cd /usr/local/stow/&& sudo stow --delete QSSTV* #"
+echo "# cd /usr/local/stow/&& sudo stow --delete xastir* #"
 echo "###################################################"
 
-cd QSSTV
-mkdir src/build
-cd src/build
-
-qmake .. PREFIX=$qsstv_stow
+cd Xastir
+./bootstrap.sh
+mkdir build
+cd build 
+../configure --prefix=$xastir_stow
 make -j$(nproc)
 sudo make install
 
-cd $qsstv_stow/.. && sudo stow "$qsstv_ver"
+sudo rm $xastir_stow/share/xastir/maps/CC_OpenStreetMap.png
+
+cd $xastir_stow/.. && sudo stow "xastir_$xastir_ver"
 
 echo "########################" 
 echo "# Desktop Entry & Icon #"
 echo "########################" 
 
-cat <<EOF > $HOME/.local/share/applications/qsstv.desktop
+sudo dd of=$xastir_stow/share/applications/xastir.desktop << EOF 
 [Desktop Entry]
-Name=QSSTV
-Comment=Slow Scan TV
-GenericName=QSSTV
-Exec=/usr/local/bin/qsstv
-Icon=$HOME/.local/share/icons/qsstv.png
-Type=Application
+Name=Xastir
+Comment=X Amateur Station Tracking and Information Reporting
+Exec=xastir
+Icon=$HOME/.local/share/icons/xastir.png
 Terminal=false
-Categories=HamRadio;
+Type=Application
+Categories=HamRadio
+Keywords=APRS;HamRadio
 EOF
 
-cp $HOME/Downloads/QSSTV/src/icons/qsstv.png $HOME/.local/share/icons/
+cp $HOME/Downloads/Xastir/symbols/icon.png $HOME/.local/share/icons/
+
+mv $HOME/.local/share/icons/icon.png $HOME/.local/share/icons/xastir.png

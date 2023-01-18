@@ -25,7 +25,6 @@ qsstv_stow="/usr/local/stow/$qsstv_ver"
 sudo mkdir $qsstv_stow
 
 sudo apt-get install -y \
-    g++ \
     libfftw3-dev \
     qtbase5-dev \
     qtchooser \
@@ -62,8 +61,10 @@ cd $qsstv_stow/.. && sudo stow "$qsstv_ver"
 echo "########################" 
 echo "# Desktop Entry & Icon #"
 echo "########################" 
+sudo mkdir $qsstv_stow/share/applications
+sudo mkdir $qsstv_stow/share
 
-cat <<EOF > $HOME/.local/share/applications/qsstv.desktop
+sudo dd of=$qsstv_stow/share/applications/qsstv.desktop << EOF
 [Desktop Entry]
 Name=QSSTV
 Comment=Slow Scan TV

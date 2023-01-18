@@ -23,6 +23,8 @@ cd $HOME/Downloads/jtdx
 
 jtdx_dl=159
 
+curl -s https://api.github.com/repos/Xastir/Xastir/releases/latest | \
+	grep "tarball_url" | cut -d : -f 2,3
 
 wget https://github.com/jtdx-project/jtdx/archive/refs/tags/${jtdx_dl}.tar.gz -O - | tar -xz
 
