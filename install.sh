@@ -74,6 +74,7 @@ case $SELECTED in
         git \
         python3 \
         python3-pip \
+        python3-dev \
         libasound2-dev \
         build-essential \
         gfortran \
