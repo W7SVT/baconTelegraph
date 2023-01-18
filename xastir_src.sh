@@ -50,11 +50,10 @@ sudo apt-get install -y \
 
 git clone https://github.com/Xastir/Xastir.git
 
-echo "###################################################"
-echo "# Installing XASTIR in stow                        #"
-echo "# to remove run                                   #"
+echo "####################################################"
+echo "# Installing XASTIR in stow to remove run          #"
 echo "# cd /usr/local/stow/&& sudo stow --delete xastir* #"
-echo "###################################################"
+echo "####################################################"
 
 cd Xastir
 ./bootstrap.sh
@@ -66,7 +65,9 @@ sudo make install
 
 sudo rm $xastir_stow/share/xastir/maps/CC_OpenStreetMap.png
 
-cd $xastir_stow/.. && sudo stow "xastir_$xastir_ver"
+
+
+sudo mkdir $xastir_stow/share/applications
 
 echo "########################" 
 echo "# Desktop Entry & Icon #"
@@ -84,6 +85,13 @@ Categories=HamRadio
 Keywords=APRS;HamRadio
 EOF
 
+echo "####################################################"
+echo "# Stowing XASTIR to remove run                     #"
+echo "# cd /usr/local/stow/&& sudo stow --delete xastir* #"
+echo "####################################################"
+
 cp $HOME/Downloads/Xastir/symbols/icon.png $HOME/.local/share/icons/
 
 mv $HOME/.local/share/icons/icon.png $HOME/.local/share/icons/xastir.png
+
+cd $xastir_stow/.. && sudo stow "xastir_$xastir_ver"
