@@ -12,7 +12,8 @@ n.<br>
    1. To make known (an intended action, for example) in advance or unintentionally:
 
 ### Assumptions
-Fresh install of RaspberryPi OS Bullseye, though Buster is still supported until breaking changes
+A SBC (Single Board Computer) Though initialy designed for Raspberry Pi 4 we has expanded to many others.
+Fresh install of ARM64 or ARMHF OS preferable RaspberryPi OS Bullseye, though Buster is still supported until breaking changes
 <br>Love of Ham Radio
 
 ### Install
