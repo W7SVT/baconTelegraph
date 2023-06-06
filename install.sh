@@ -86,6 +86,7 @@ case $SELECTED in
     sudo pip3 install pi-ina219
     sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
     sudo locale-gen
+    sudo usermod -aG dialout $USER
 
     find /lib/modules -type f -name "*.ko"|grep cp21
 

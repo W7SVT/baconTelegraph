@@ -59,7 +59,7 @@ echo "# Installing  hamlib #"
 echo "######################" 
 
 ./configure
-make 
+make -j$(nproc) 
 sudo make install
 sudo ldconfig
 

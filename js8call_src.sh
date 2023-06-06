@@ -2,7 +2,7 @@
 #!/bin/bash
 #########################################################
 # Created by W7SVT APR 2022 #############################
-# Updated by W7SVT APR 2022 #############################
+# Updated by W7SVT JUN 2023 #############################
 #########################################################
 #########################################################
 #  __      ___________  _____________   _______________ #
@@ -70,7 +70,7 @@ cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON js8call
 cd $js8_BLD && cmake "../js8call"
 cd $HOME/Downloads/js8call
 
-cmake --build js8call_BLD_DIR -j4
+cmake --build js8call_BLD_DIR -j$(nproc)
 cd $HOME/Downloads/js8call/$js8_BLD && sudo cmake --install . --prefix "$js8_stow"js8call
 
 cd /usr/local/stow/ && sudo stow js8call

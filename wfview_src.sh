@@ -64,4 +64,3 @@ sudo make install
 
 cd $wfview_stow/.. && sudo stow "$wfview_ver"
 
-sudo usermod -aG dialout $USER
