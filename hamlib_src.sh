@@ -31,7 +31,7 @@ hamlib_tarball_url=$(curl -sL https://api.github.com/repos/Hamlib/Hamlib/release
 hamlib_ver=$(basename "$hamlib_tarball_url" .tar.gz)
 
 echo "#############################" 
-echo "# Downloading libusb-1.0.24 #"
+echo "# Downloading libusb        #"
 echo "#############################"
 cd $HOME
 wget $libusb_bzip_url -O - | tar -xj
@@ -62,9 +62,3 @@ echo "######################"
 make -j$(nproc) 
 sudo make install
 sudo ldconfig
-
-
-
-
-
-
