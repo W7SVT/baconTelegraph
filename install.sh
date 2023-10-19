@@ -92,6 +92,8 @@ case $SELECTED in
 
     sudo modprobe cp210x
 
+#TODO    export CXXFLAGS='-O2 -march=native -mtune=native'
+#TODO    export CFLAGS='-O2 -march=native -mtune=native'
 
     sudo raspi-config nonint do_ssh
     pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg 
@@ -107,6 +109,9 @@ case $SELECTED in
 ;;
    "WSJT-X") \
 /bin/sh $HOME/baconTelegraph/wsjtx_src.sh
+;;
+   "Fldigi") \
+/bin/sh $HOME/baconTelegraph/fldigi_src.sh
 ;;
    "CHIRP") \
 /bin/sh $HOME/baconTelegraph/chirp.sh
