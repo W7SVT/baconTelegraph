@@ -82,3 +82,7 @@ echo "# cd /usr/local/stow/&& sudo stow --delete QSSTV* #"
 echo "###################################################"
 
 cd $qsstv_stow/.. && sudo stow "$qsstv_ver"
+
+# Adjust permissions for the executable
+sudo chmod +x /usr/local/bin/qsstv
+sudo chown $(whoami):$(whoami) /usr/local/bin/qsstv
