@@ -18,7 +18,7 @@ Fresh install of RaspberryPi OS Bullseye, though Buster is still supported until
 
 ### Install
 ```
-git clone https://github.com/W7SVT/baconTelegraph.git  ~/baconTelegraph && /bin/sh ~/baconTelegraph/install.sh
+pi@bacon:~ $ git clone https://github.com/W7SVT/baconTelegraph.git  ~/baconTelegraph && /bin/sh ~/baconTelegraph/install.sh
 ```
 
 #### Note: Once you have installed everything you would like a reboot is nessasary
