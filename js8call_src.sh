@@ -22,20 +22,14 @@ echo "###################################################"
 
 cd $HOME/Downloads/js8call
 
-js8_dl=$(curl -s http://files.js8call.com/latest.html | \
-    tac | \
-    grep .tgz | \
-    grep -v rc | \
-    awk -F'"' '$0=$2'
-)
-
-js8_ver="$(basename "$js8_dl" .tgz)"
+js8_tag=$(curl -s https://api.github.com/repos/js8call/js8call/releases/latest | grep -oP '"tag_name": ?"\K[^"]+')
+js8_ver="${js8_tag#v}"
 js8_stow="/usr/local/stow/"
 js8_BLD="js8call_BLD_DIR"
 
-wget -t 5 $js8_dl -O - | tar -xz
+wget -t 5 "https://github.com/js8call/js8call/archive/refs/tags/${js8_tag}.tar.gz" -O - | tar -xz
 
-mkdir $js8_BLD
+mkdir -p $js8_BLD
 
 
 echo "###################################################"
@@ -59,18 +53,17 @@ sudo apt install -y \
 	libboost-dev \
 	libboost-all-dev
 
-sudo mkdir "$js8_stow"js8call
+sudo mkdir -p "$js8_stow"js8call
 
 echo "###################################################"
 echo "# Installing JS8call in stow to remove run:       #"
 echo "# 'cd /usr/local/stow/ && sudo stow -D js8call'   #"
 echo "###################################################"
 
-cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON js8call
-cd $js8_BLD && cmake "../js8call"
+cd $js8_BLD && cmake -DWSJT_GENERATE_DOCS=OFF -DWSJT_SKIP_MANPAGES=ON "../js8call-$js8_ver"
 cd $HOME/Downloads/js8call
 
-cmake --build js8call_BLD_DIR -j4
+cmake --build js8call_BLD_DIR -j$(nproc)
 cd $HOME/Downloads/js8call/$js8_BLD && sudo cmake --install . --prefix "$js8_stow"js8call
 
 cd /usr/local/stow/ && sudo stow js8call
