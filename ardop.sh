@@ -46,6 +46,7 @@ echo "#######################"
 echo "# ARDOP HF Entry      #"
 echo "#######################" 
 
+mkdir -p $HOME/.local/share/applications
 cat <<EOF > $HOME/.local/share/applications/ardopgui.desktop
 [Desktop Entry]
 Name=ARDOP GUI

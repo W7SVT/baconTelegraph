@@ -69,6 +69,7 @@ echo "#######################"
 echo "# Desktop Entry conky #"
 echo "#######################" 
 
+mkdir -p $HOME/.local/share/applications
 cat <<EOF > $HOME/.local/share/applications/conky.desktop
 [Desktop Entry]
 Name=Conky
