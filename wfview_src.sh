@@ -15,16 +15,11 @@
 mkdir -p "$HOME/Downloads"
 cd "$HOME/Downloads"
 
-wfview_ver=$(curl -s https://gitlab.com/api/v4/projects/9269387/releases/ | \
-    jq '.[]' | \
-    jq -r '.name' | \
-    head -1 | \
-    sed -e 's/ v/_/g'
-)
+wfview_ver=$(curl -s https://gitlab.com/api/v4/projects/9269387/releases/ | jq -r '.[0].tag_name' | sed -e 's/^v//')
 
-wfview_stow="/usr/local/stow/$wfview_ver"
+wfview_stow="/usr/local/stow/wfview_$wfview_ver"
 
-sudo mkdir -p $wfview_stow
+sudo mkdir -p "$wfview_stow"
 
 sudo apt-get install -y \
     build-essential \
@@ -59,11 +54,11 @@ git clone https://gitlab.com/eliggett/wfview.git
 cd wfview
 mkdir -p build
 cd build
-qmake ../wfview.pro PREFIX=$wfview_stow
+qmake ../wfview.pro PREFIX="$wfview_stow"
 make -j$(nproc)
 sudo make install
 
 
-cd $wfview_stow/.. && sudo stow "$wfview_ver"
+cd "$wfview_stow/.." && sudo stow "wfview_$wfview_ver"
 
 sudo usermod -aG dialout $USER
