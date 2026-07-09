@@ -42,16 +42,10 @@ sudo apt install -y \
   	asciidoctor \
 	texinfo \
   	libfftw3-dev \
-  	qtmultimedia5-dev \
-  	qttools5-dev \
-  	qttools5-dev-tools \
-  	libqt5serialport5-dev \
-	libqt5websockets5-dev \
-	libqt5multimedia5 \
-	libqt5multimedia5-plugins \
-	qtmultimedia5-dev \
-	libboost-dev \
-	libboost-all-dev \
+	qt6-base-dev \
+	qt6-multimedia-dev \
+	qt6-serialport-dev \
+	qt6-tools-dev \
 	libboost1.81-all-dev
 
 sudo mkdir -p "$js8_stow"js8call
