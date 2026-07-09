@@ -51,7 +51,8 @@ sudo apt install -y \
 	libqt5multimedia5-plugins \
 	qtmultimedia5-dev \
 	libboost-dev \
-	libboost-all-dev
+	libboost-all-dev \
+	libboost1.81-all-dev
 
 sudo mkdir -p "$js8_stow"js8call
 
