@@ -13,7 +13,7 @@
 #        \/                   \/                        #
 #########################################################
 
-mkdir $HOME/Downloads/wsjtx
+mkdir -p $HOME/Downloads/wsjtx
 
 echo "###################################################" 
 echo "# Downloading WSJT-X Source                       #"

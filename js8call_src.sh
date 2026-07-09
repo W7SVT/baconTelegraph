@@ -14,7 +14,7 @@
 #########################################################
 
 
-mkdir $HOME/Downloads/js8call
+mkdir -p $HOME/Downloads/js8call
 
 echo "###################################################" 
 echo "# Downloading JS8Call Source                      #"

@@ -12,8 +12,9 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
-mkdir jtdx
+mkdir -p "$HOME/Downloads"
+cd "$HOME/Downloads"
+mkdir -p jtdx
 
 echo "###################################################" 
 echo "# Downloading JTDX Source                         #"
@@ -26,7 +27,7 @@ jtdx_dl=159
 wget https://github.com/jtdx-project/jtdx/archive/refs/tags/${jtdx_dl}.tar.gz -O - | tar -xz
 
 
-mkdir JTDX_BLD_DIR
+mkdir -p JTDX_BLD_DIR
 
 
 echo "###################################################"
@@ -49,7 +50,7 @@ sudo apt install -y \
 	libboost-dev \
 	libboost-all-dev
 
-sudo mkdir /usr/local/stow/jtdx_$jtdx_dl
+sudo mkdir -p /usr/local/stow/jtdx_$jtdx_dl
 
 echo "###################################################"
 echo "# Installing JTDX in stow to remove run:          #"
@@ -60,8 +61,8 @@ cd $HOME/Downloads/jtdx/JTDX_BLD_DIR
 cmake \
 	-DWSJT_GENERATE_DOCS=OFF \
 	-DWSJT_SKIP_MANPAGES=ON \
-	-D CMAKE_INSTALL_PREFIX=/usr/local/stow/jtdx_$jtdx_dl" \
-	../jtdx-${jtdx_dl}"
+	-D CMAKE_INSTALL_PREFIX="/usr/local/stow/jtdx_$jtdx_dl" \
+	"../jtdx-${jtdx_dl}"
 
 cmake --build ../JTDX_BLD_DIR -j$(nproc)
 

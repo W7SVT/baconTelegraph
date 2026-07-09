@@ -12,7 +12,8 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
+mkdir -p "$HOME/Downloads"
+cd "$HOME/Downloads"
 
 echo "######################" 
 echo "# Read/Set CALLSIGN  #"

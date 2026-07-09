@@ -12,7 +12,8 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
+mkdir -p "$HOME/Downloads"
+cd "$HOME/Downloads"
 
 wfview_ver=$(curl -s https://gitlab.com/api/v4/projects/9269387/releases/ | \
     jq '.[]' | \
