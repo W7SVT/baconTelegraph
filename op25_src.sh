@@ -34,6 +34,7 @@ sudo apt update && sudo apt upgrade -y
     libitpp-dev \
     libpcap-dev \
     liborc-dev \
+    libcppunit-dev \
     cmake \
     git \
     swig \
