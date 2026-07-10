@@ -24,7 +24,7 @@ echo "#######################"
 echo "# Install  Direwolf   #"
 echo "#######################" 
 cd $HOME/direwolf
-mkdir build && cd build
+mkdir -p build && cd build
 cmake ..
 make -j 4
 sudo make install
@@ -34,7 +34,7 @@ echo "# Conf Direwolf       #"
 echo "#######################" 
 
 make install-conf
-sed -i "s/N0CALL/$CALL/" "$HOME/direwolf.conf"
+sed -i "s/N0CALL/$CALLSIGN/" "$HOME/direwolf.conf"
 sed -i 's/# ADEVICE  plughw:1,0/ADEVICE  plughw:2,0/' $HOME/direwolf.conf
 sed -i '/#PTT\ \/dev\/ttyUSB0\ RTS/a #Uncomment line below for PTT with sabrent sound card\n#PTT RIG 2 localhost:4532' $HOME/direwolf.conf
 rm -rf $HOME/direwolf

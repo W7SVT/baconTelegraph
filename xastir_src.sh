@@ -12,7 +12,8 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
+mkdir -p "$HOME/Downloads"
+cd "$HOME/Downloads"
 
 echo "###################################################"
 echo "# Prepping XASTIR build & prereqs                 #"
@@ -88,6 +89,7 @@ echo "# Stowing XASTIR to remove run                     #"
 echo "# cd /usr/local/stow/&& sudo stow --delete xastir* #"
 echo "####################################################"
 
+mkdir -p $HOME/.local/share/icons
 cp $HOME/Downloads/Xastir/symbols/icon.png $HOME/.local/share/icons/
 
 mv $HOME/.local/share/icons/icon.png $HOME/.local/share/icons/xastir.png

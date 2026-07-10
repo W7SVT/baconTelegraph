@@ -13,7 +13,8 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
+mkdir -p "$HOME/Downloads"
+cd "$HOME/Downloads"
 
 echo "#######################" 
 echo "# Downloading CHIRP #"

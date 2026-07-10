@@ -83,7 +83,7 @@ case $SELECTED in
         g++ \
         stow \
         extra-xdg-menus 
-    sudo pip3 install pi-ina219
+    sudo pip3 install pi-ina219 --break-system-packages 2>/dev/null || sudo pip3 install pi-ina219
     sudo sed -i "s/# en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
     sudo locale-gen
 
@@ -92,58 +92,58 @@ case $SELECTED in
     sudo modprobe cp210x
 
 
-    sudo raspi-config nonint do_ssh
-    pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg 
+    command -v raspi-config >/dev/null 2>&1 && sudo raspi-config nonint do_ssh
+    command -v pcmanfm >/dev/null 2>&1 && pcmanfm --set-wallpaper $HOME/baconTelegraph/files/radioRoom2.jpeg
 ;;
    "ALL") \
-/bin/sh $HOME/baconTelegraph/install_all.sh
+bash $HOME/baconTelegraph/install_all.sh
 ;;
    "hamlib") \
-/bin/sh $HOME/baconTelegraph/hamlib_src.sh
+bash $HOME/baconTelegraph/hamlib_src.sh
 ;;
    "JTDX") \
-/bin/sh $HOME/baconTelegraph/jtdx_src.sh
+bash $HOME/baconTelegraph/jtdx_src.sh
 ;;
    "WSJT-X") \
-/bin/sh $HOME/baconTelegraph/wsjtx_src.sh
+bash $HOME/baconTelegraph/wsjtx_src.sh
 ;;
    "CHIRP") \
-/bin/sh $HOME/baconTelegraph/chirp.sh
+bash $HOME/baconTelegraph/chirp.sh
 ;;
    "Conky") \
-/bin/sh $HOME/baconTelegraph/conky.sh
+bash $HOME/baconTelegraph/conky.sh
 ;;
    "ConkySM") \
-/bin/sh $HOME/baconTelegraph/conkySM.sh
+bash $HOME/baconTelegraph/conkySM.sh
 ;;
    "JS8Call") \
-/bin/sh $HOME/baconTelegraph/js8call_src.sh
+bash $HOME/baconTelegraph/js8call_src.sh
 ;;
    "wfview") \
-/bin/sh $HOME/baconTelegraph/wfview_src.sh
+bash $HOME/baconTelegraph/wfview_src.sh
 ;;
    "QSSTV") \
-/bin/sh $HOME/baconTelegraph/qsstv_src.sh
+bash $HOME/baconTelegraph/qsstv_src.sh
 ;;
    "ARDOP") \
-/bin/sh $HOME/baconTelegraph/ardop.sh
+bash $HOME/baconTelegraph/ardop.sh
 ;;
    "Direwolf") \
-/bin/sh $HOME/baconTelegraph/direwolf_src.sh
+bash $HOME/baconTelegraph/direwolf_src.sh
 ;;
    "XASTIR") \
-/bin/sh $HOME/baconTelegraph/xastir_src.sh
+bash $HOME/baconTelegraph/xastir_src.sh
 ;;
    "OP25") \
-/bin/sh $HOME/baconTelegraph/op25_src.sh
+bash $HOME/baconTelegraph/op25_src.sh
 ;;
    "gpsTimeSync") \
-/bin/sh $HOME/baconTelegraph/gpsTimeSync.sh
+bash $HOME/baconTelegraph/gpsTimeSync.sh
 ;;
    *) \
 echo "Sorry, no selection made"
-exit 0   
+exit 0
    ;;
 esac
 ####Once More
-/bin/sh install.sh
+bash $HOME/baconTelegraph/install.sh

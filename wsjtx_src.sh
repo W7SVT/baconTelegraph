@@ -13,15 +13,14 @@
 #        \/                   \/                        #
 #########################################################
 
-mkdir $HOME/Downloads/wsjtx
+mkdir -p $HOME/Downloads/wsjtx
 
 echo "###################################################" 
 echo "# Downloading WSJT-X Source                       #"
 echo "###################################################" 
 
 wsjtx_ver=$(curl -qsL "https://sourceforge.net/projects/wsjt/best_release.json" | \
-	sed "s/, /,\n/g" | \
-	sed -rn "/release/,/\}/{ /filename/{ 0,//s/([^0-9]*)([0-9\.]+)([^0-9]*.*)/\2/ p }}"
+	grep -oP '"filename": ?"/wsjtx-\K[0-9][^/"]*' | head -1
 	)
 
 wsjtx_stow="/usr/local/stow/wsjtx_"$wsjtx_ver""

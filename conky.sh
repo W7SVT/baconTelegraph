@@ -12,7 +12,8 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
+mkdir -p "$HOME/Downloads"
+cd "$HOME/Downloads"
 
 echo "######################" 
 echo "# Read/Set CALLSIGN  #"
@@ -69,6 +70,7 @@ echo "#######################"
 echo "# Desktop Entry       #"
 echo "#######################" 
 
+mkdir -p $HOME/.local/share/applications
 cat <<EOF > $HOME/.local/share/applications/conky.desktop
 [Desktop Entry]
 Name=Conky

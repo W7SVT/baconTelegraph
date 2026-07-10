@@ -12,7 +12,8 @@
 #        \/                   \/                        #
 #########################################################
 
-cd $HOME/Downloads
+mkdir -p "$HOME/Downloads"
+cd "$HOME/Downloads"
 
 echo "###################################################"
 echo "# Prepping QSSTV build & prereqs                  #"
@@ -22,7 +23,7 @@ qsstv_ver="qsstv_9.5"
 
 qsstv_stow="/usr/local/stow/$qsstv_ver"
 
-sudo mkdir $qsstv_stow
+sudo mkdir -p $qsstv_stow
 
 sudo apt-get install -y \
     libfftw3-dev \
@@ -49,7 +50,7 @@ echo "# cd /usr/local/stow/&& sudo stow --delete QSSTV* #"
 echo "###################################################"
 
 cd QSSTV
-mkdir src/build
+mkdir -p src/build
 cd src/build
 
 qmake .. PREFIX=$qsstv_stow
@@ -59,8 +60,8 @@ sudo make install
 echo "########################" 
 echo "# Desktop Entry & Icon #"
 echo "########################" 
-sudo mkdir $qsstv_stow/share
-sudo mkdir $qsstv_stow/share/applications
+sudo mkdir -p $qsstv_stow/share
+sudo mkdir -p $qsstv_stow/share/applications
 
 sudo dd of=$qsstv_stow/share/applications/qsstv.desktop << EOF
 [Desktop Entry]
@@ -74,6 +75,7 @@ Terminal=false
 Categories=HamRadio;
 EOF
 
+mkdir -p $HOME/.local/share/icons
 cp $HOME/Downloads/QSSTV/src/icons/qsstv.png $HOME/.local/share/icons/
 
 echo "###################################################"

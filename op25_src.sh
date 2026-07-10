@@ -16,7 +16,7 @@ echo "#########################"
 echo "# Enable deb-src        #"
 echo "#########################" 
 
- sed -e "s/^# deb/deb/g" /etc/apt/sources.list
+ sudo sed -i -e "s/^# deb/deb/g" /etc/apt/sources.list
 
 echo "#########################" 
 echo "# Download install OP25 #"
@@ -34,6 +34,7 @@ sudo apt update && sudo apt upgrade -y
     libitpp-dev \
     libpcap-dev \
     liborc-dev \
+    libcppunit-dev \
     cmake \
     git \
     swig \
@@ -77,6 +78,6 @@ echo "# Create aliase for OP25 #"
 echo "##########################" 
 
 cat <<EOF > $HOME/.bash_aliases
-alias op25='bash /home/pi/op25/op25.sh'
+alias op25='bash $HOME/op25/op25.sh'
 EOF
 
